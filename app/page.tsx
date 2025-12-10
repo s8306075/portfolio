@@ -246,7 +246,7 @@ const Home = () => {
       <section className="py-24 px-6 bg-white overflow-hidden relative" aria-labelledby="about-me-preview-heading">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Image */}
-          <FadeIn variant="fade" className="relative order-2 lg:order-1 flex justify-center lg:justify-start">
+          <FadeIn variant="fade" className="relative order-2 lg:order-1 flex justify-center">
             <div className="relative group w-full max-w-md">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[105%] h-[105%] bg-taupe/50 rounded-[2.5rem] transform -rotate-3 z-0 blur-xs" aria-hidden="true"></div>
               <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-lg bg-taupe relative z-10 transform transition-transform duration-700 hover:scale-[1.02]">
