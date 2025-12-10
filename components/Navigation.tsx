@@ -1,8 +1,14 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { PROFILE } from '@/constants';
 
 const Navigation = () => {
+  // Navigation Links
+  const location = usePathname();
+
   // Navigation Links
   const navLinks = [
     { name: '首頁', path: '/' },
@@ -24,25 +30,32 @@ const Navigation = () => {
           className="text-2xl font-bold text-navy tracking-tight group"
           aria-label={`${PROFILE.name} - Home`}
         >
-          <span className="text-sunfire">{PROFILE.name.charAt(0)}</span>
-          <span className="text-navy">{PROFILE.name.slice(1)}</span>
-          <span className="text-[#F28A5B] group-hover:animate-pulse">.</span>
+          {PROFILE.name}<span className="text-sunfire group-hover:animate-pulse">.</span>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-10" role="menubar">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              href={link.path}
-              role="menuitem"
-              className="text-sm font-medium tracking-wide text-umber hover:text-sunfire transition-colors duration-200 py-1 relative group"
-            >
-              {link.name}
-              {/* Hover Indicator (replacing Active Indicator) */}
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-sunfire/50 rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-300 origin-left" aria-hidden="true"></span>
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = link.path === '/' 
+              ? location === '/' 
+              : location.startsWith(link.path);
+
+            return (
+              <Link
+                key={link.path}
+                href={link.path}
+                role="menuitem"
+                className={`text-sm font-medium tracking-wide transition-colors duration-200 py-1 relative group ${isActive ? 'text-sunfire' : 'text-umber hover:text-sunfire'}`}
+              >
+                {link.name}
+                {/* Active/Hover Indicator */}
+                <span 
+                  className={`absolute bottom-0 left-0 w-full h-[2px] bg-sunfire rounded-full transition-all duration-300 origin-left transform ${isActive ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100'}`} 
+                  aria-hidden="true"
+                ></span>
+              </Link>
+            );
+          })}
           <a 
             href="mailto:hello@alexchen.dev" 
             className="ml-4"
@@ -75,16 +88,22 @@ const Navigation = () => {
            <X size={24} aria-hidden="true" />
         </label>
 
-        {navLinks.map((link) => (
+        {navLinks.map((link) => {
+           const isActive = link.path === '/' 
+              ? location === '/' 
+              : location.startsWith(link.path);
+           
+           return (
             <Link
               key={link.path}
               href={link.path}
               role="menuitem"
-              className="text-lg font-medium text-umber hover:text-sunfire transition-colors"
+              className={`text-lg font-medium transition-colors ${isActive ? 'text-sunfire' : 'text-umber hover:text-sunfire'}`}
             >
               {link.name}
             </Link>
-        ))}
+           );
+        })}
         
         <a 
           href="mailto:hello@alexchen.dev" 
