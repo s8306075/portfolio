@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { 
-  ArrowLeft, Lightbulb, X, Maximize2, 
+  ArrowLeft, Lightbulb, Maximize2, 
   Code2, Database, Layout, Wrench, Circle, Zap, Target,
   CheckCircle2, Server
 } from 'lucide-react';
@@ -18,7 +18,6 @@ export function generateStaticParams() {
 export default async function ProjectDetail({ params }: { params: { id: string } }) {
   const resolvedParams = await params; // unwrap Promise in dev mode
   const project = PROJECTS.find(p => p.id === resolvedParams.id);
-
 
   if (!project) {
     return (

@@ -47,7 +47,7 @@ const ContactCTA = ({ variant = 'home' }: ContactCTAProps) => {
       containerStyle: "bg-beige border border-taupe/20 shadow-sm relative overflow-hidden",
       icon: Settings,
       iconColor: "text-sunfire",
-      iconBg: "bg-sunfire-50",
+      iconBg: "bg-orange-50",
       title: "從「想法」到「落地」",
       desc: "每個偉大的系統都始於一次深度的對談。告訴我你的商業目標，我們一起規劃出最適合的技術路徑。",
       primaryBtnText: "聯絡我討論需求",

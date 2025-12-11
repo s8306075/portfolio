@@ -52,17 +52,17 @@ const About = () => {
     { 
       icon: Zap, 
       title: "系統與流程", 
-      desc: "穩健推進每個專案，強調計畫與流程，確保專案能有序落地。" 
+      desc: "我不只寫程式，更重視計畫與流程。穩健的推進方式，能確保您的專案有序落地，不再因為混亂而延期。" 
     },
     { 
       icon: Users, 
       title: "價值與影響", 
-      desc: "成果服務他人，工作必須創造實際價值，對使用者或團隊有正面影響。" 
+      desc: "技術只是手段，解決問題才是目的。我確保每一個功能開發，都能為您的使用者或團隊創造實際的正面影響。" 
     },
     { 
       icon: GitMerge, 
       title: "理念契合", 
-      desc: "共鳴才能協作，重視與夥伴或客戶的理念契合，以促成高效合作。" 
+      desc: "共鳴才能協作。我重視與夥伴或客戶的理念契合，因為互相信任的合作關係，才能促成最高效的成果。" 
     }
   ];
 
@@ -70,17 +70,17 @@ const About = () => {
     { 
       icon: MessageSquare, 
       title: "清晰溝通", 
-      desc: "用簡單明確的方式傳達想法與需求，讓合作更順暢。" 
+      desc: "拒絕術語堆砌。我用簡單明確的方式傳達想法與需求，讓您完全理解專案狀況，讓合作更順暢。" 
     },
     { 
       icon: Target, 
       title: "專案落地", 
-      desc: "我會用小步驟推進專案，確保事情從想法到完成都能順利進行。" 
+      desc: "再大的願景也需要落地。我會將大目標拆解為小步驟推進，確保事情從想法到完成都能順利進行，讓您看見進度。" 
     },
     { 
       icon: RefreshCw, 
       title: "彈性應變", 
-      desc: "保留一定彈性，遇到突發狀況或新想法能迅速調整，確保專案順利完成。" 
+      desc: "保留架構的彈性。遇到突發狀況或新想法能迅速調整，確保專案順利完成，不被僵化的規格綁架。" 
     }
   ];
 
@@ -106,7 +106,7 @@ const About = () => {
       <section className="px-6 mb-24" aria-label="Biography">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* Left: Image */}
-          <div className="lg:col-span-5 relative md:sticky md:top-32 self-start">
+          <div className="lg:col-span-5 relative lg:sticky lg:top-32 self-start">
             <FadeIn variant="scale" className="relative p-4">
               <div className="absolute inset-0 bg-sand/80 rounded-3xl transform -rotate-3 scale-105 z-0 blur-sm" aria-hidden="true" />
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg z-10">
@@ -132,23 +132,23 @@ const About = () => {
               <div className="w-16 h-1 bg-sunfire mb-10 rounded-full" aria-hidden="true"></div>
             </FadeIn>
 
-            <div className="space-y-6 text-lg text-umber leading-relaxed mb-8">
-              <FadeIn variant="fade" delay={100}>
-                <p>
-                  擁有 10 年全端開發經驗，我看過太多專案失敗不是因為技術不夠強，而是因為「需求沒想清楚」。轉型為獨立開發者後，我將這份經驗轉化為價值：協助客戶在動手開發前，先理清邏輯，避免無謂的試錯成本。
-                </p>
-              </FadeIn>
-              <FadeIn variant="fade" delay={200}>
-                <p>
-                  與我合作，你不會感受到被技術壓著跑的壓力。我習慣用淺顯易懂的語言溝通，引導你說出真正的痛點。我交付的不只是程式碼，而是一套邏輯自洽、能隨業務成長的系統解決方案。
-                </p>
-              </FadeIn>
-              <FadeIn variant="fade" delay={250}>
-                <p className="font-semibold text-smoke/90 border-l-4 border-taupe/40 pl-4 py-1">
-                  您現在瀏覽的這個網站，正是由我從無到有親手打造。從資訊架構的梳理、內容策略的佈局，到設計系統與前端程式碼的實作，完整體現了我能為您提供的完整價值——不僅是執行者，更是能顧全大局的規劃者。
-                </p>
-              </FadeIn>
-            </div>
+             <div className="space-y-6 text-lg text-umber leading-relaxed mb-8">
+               <FadeIn variant="fade" delay={100}>
+                 <p>
+                   10 年的全端開發經驗，讓我學到的最重要一課是：專案失敗往往不是因為技術問題，而是「需求沒想清楚」。轉型為獨立開發者後，我將這份經驗轉化為對您的價值：協助您在動手開發前，先理清邏輯，大幅降低試錯成本與開發風險。
+                 </p>
+               </FadeIn>
+               <FadeIn variant="fade" delay={200}>
+                 <p>
+                   與我合作，您不會感受到被技術壓著跑的壓力。我習慣用淺顯易懂的語言溝通，引導您說出真正的痛點。我交付的不只是程式碼，而是一套邏輯自洽、能隨業務成長的系統解決方案，讓您能安心專注於業務發展。
+                 </p>
+               </FadeIn>
+               <FadeIn variant="fade" delay={250}>
+                 <p className="font-semibold text-smoke/90 border-l-4 border-taupe/40 pl-4 py-1">
+                   您現在瀏覽的這個網站，正是由我從無到有親手打造。從資訊架構的梳理、內容策略的佈局，到設計系統與前端程式碼的實作，這不僅是作品，更是我能為您提供的完整價值的體現——不僅是執行者，更是能顧全大局的規劃夥伴。
+                 </p>
+               </FadeIn>
+             </div>
 
             <FadeIn variant="fade" delay={300}>
               <div className="w-full h-px bg-gradient-to-r from-taupe/40 to-transparent my-8" aria-hidden="true" />
@@ -184,7 +184,7 @@ const About = () => {
                 <Heart className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
                 我相信的事 / 我如何工作
               </h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">核心價值與工作方法</span>
+              <span className="block text-lg font-medium text-charcoal/90 mb-6">與我合作，您將獲得的價值</span>
               <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
             </FadeIn>
           </div>

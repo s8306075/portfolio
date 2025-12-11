@@ -55,15 +55,15 @@ const Home = () => {
             <FadeIn delay={100} variant="up">
               {/* Structure: H1 + Sub + Bar */}
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-[1.1] tracking-tight">
-                將模糊想法，<br />轉化為穩健運行的<br />
+                你不需懂程式碼，<br />只要專注<br />
                 <span className="relative inline-block mt-2 z-10">
-                  數位資產
-                  <span className="absolute left-0 bottom-2 w-full h-4 bg-sunfire/20 -z-10 rounded-sm transform -rotate-1 skew-x-12" aria-hidden="true"></span>
+                   商業目標
+                   <span className="absolute left-0 bottom-2 w-full h-4 bg-sunfire/20 -z-10 rounded-sm transform -rotate-1 skew-x-12" aria-hidden="true"></span>
                 </span>
               </h1>
               
               <p className="text-lg md:text-xl text-umber max-w-xl mb-6 leading-relaxed">
-                你不需要懂技術，只要告訴我你的困擾。我協助你將模糊的想法，收斂成邏輯清晰的執行藍圖，打造真正能解決問題的系統。
+                讓我協助你將模糊的需求，收斂為邏輯清晰的執行藍圖。打造穩定、好用，且真正能解決商業問題的數位資產。
               </p>
 
               {/* Accent Bar */}
@@ -169,8 +169,8 @@ const Home = () => {
           {/* Section Header */}
           <div className="text-center mb-16">
             <FadeIn variant="up">
-              <h2 id="core-services-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2">核心服務項目</h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">專注於架構與體驗的全端開發</span>
+              <h2 id="core-services-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2">專注於解決真實問題</h2>
+              <span className="block text-lg font-medium text-charcoal/90 mb-6">不只是開發功能，更在乎系統能否為您帶來價值</span>
               <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
             </FadeIn>
           </div>
@@ -293,20 +293,20 @@ const Home = () => {
                 不被技術名詞綁架，<br />專注解決你的真實問題
               </h2>
               <span className="block text-lg font-medium text-charcoal/90 mb-6">
-                一位「聽得懂人話」的技術合作夥伴
+                讓溝通回歸邏輯，讓開發回歸商業價值
               </span>
               <div className="w-16 h-1 bg-sunfire mb-10 rounded-full" aria-hidden="true"></div>
             </FadeIn>
 
             <FadeIn variant="fade" delay={150}>
               <p className="text-lg text-smoke/90 mb-8 leading-relaxed font-semibold border-l-[2px] border-taupe/60 pl-6 py-1">
-                你不需要懂程式碼，只要專注於你的商業目標。我擅長扮演「翻譯者」，將你腦中的構想與流程，轉譯為邏輯縝密的系統架構。
+                我們不需要一堆聽不懂的術語。我擅長扮演「翻譯者」，將你的商業痛點，轉譯為工程師能執行的邏輯架構。
               </p>
             </FadeIn>
 
             <FadeIn variant="fade" delay={300}>
               <p className="text-lg text-umber leading-relaxed mb-8">
-                我不追求堆砌最新的技術名詞，而是選擇最適合、最穩健的方案。對我來說，一個好系統的定義很簡單：邏輯清晰、運作穩定，並且真正解決了團隊的痛點。
+                我不追求最花俏的技術，只追求最穩健的解法。對我來說，一個好系統的標準很簡單：好用、穩定，並且真正幫你省下時間與成本。
               </p>
             </FadeIn>
 

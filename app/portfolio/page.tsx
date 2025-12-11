@@ -36,22 +36,24 @@ const Portfolio = () => {
       />
 
       {/* Hero Section */}
-      <section className="px-6 mb-16 text-center max-w-4xl mx-auto">
-        <FadeIn variant="up">
-          <h1 className="text-4xl md:text-5xl font-bold text-textHead mb-2">
-            精選作品集
-          </h1>
-          <p className="text-lg text-textHead/90 font-medium mb-6">
-            從自動化工具到商業數據後台的實戰成果
-          </p>
-          <div className="w-16 h-1 bg-primary mx-auto rounded-full mb-8"></div>
-        </FadeIn>
-        <FadeIn variant="fade" delay={150}>
-          <p className="text-lg text-textHead/90 max-w-2xl mx-auto leading-relaxed">
-            每一個專案都是我對「系統穩定性」與「使用者價值」的實踐。
-            點擊卡片，看看我如何將複雜的需求，轉化為直覺好用的數位工具。
-          </p>
-        </FadeIn>
+      <section className="px-6 mb-16" aria-label="Portfolio Header">
+        <div className="max-w-4xl mx-auto text-center">
+          <FadeIn variant="up">
+            <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-2">
+              精選實戰案例
+            </h1>
+            <p className="text-lg text-charcoal/90 font-medium mb-6">
+              不只是作品展示，更是解決真實商業問題的證明
+            </p>
+            <div className="w-16 h-1 bg-sunfire mx-auto rounded-full mb-8"></div>
+          </FadeIn>
+          <FadeIn variant="fade" delay={150}>
+            <p className="text-lg text-charcoal/90 max-w-2xl mx-auto leading-relaxed">
+              每一個專案都是我對「降低風險」與「提升效率」的實踐。
+              點擊卡片，看看我如何協助客戶將複雜的需求，轉化為直覺好用的數位工具。
+            </p>
+          </FadeIn>
+        </div>
       </section>
 
       {/* Portfolio Grid */}
