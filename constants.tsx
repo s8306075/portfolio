@@ -138,7 +138,6 @@ export const PROJECTS: Project[] = [
     category: "Dashboard / 資料視覺化",
     shortDesc: "別讓投資紀錄變成一筆糊塗帳。集中管理交易與股利，自動計算損益，用直覺圖表輔助投資決策。",
     thumbnail: "/investment-dashboard-2023.png",
-    role: "獨立全端開發與產品設計",
     role: "系統規劃、全端開發與介面設計",
     timeline: "2023",
     heroHeadline: "讓數據說話，投資決策不再憑感覺",
