@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     "魚也是貓 - 專注於邏輯梳理與系統落地的獨立全端開發者。提供客製化網站開發、自動化系統建置與技術諮詢服務。",
   authors: [{ name: "魚也是貓" }],
   robots: "index, follow",
+  verification: {
+    google: 'uyeJrHM3E1cRy7-l0MDIQKTSo5l6yU9LhQXaiAYo4SM'
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
