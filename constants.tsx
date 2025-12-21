@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
     title: '行政資料管理系統',
     category: '內部工具開發',
     shortDesc: '資料秒找無負擔。建立集中查詢系統，終結查找混亂，將作業流程全面標準化。',
-    thumbnail: 'https://picsum.photos/id/180/800/600',
+    thumbnail: '/office-automation-2025.png',
     role: '系統架構設計與全端開發',
     timeline: '2025',
     heroHeadline: '資料秒找，行政作業效率翻倍',
@@ -81,14 +81,14 @@ export const PROJECTS: Project[] = [
 
     screenshots: [
       {
-        src: 'https://picsum.photos/id/160/1024/768',
+        src: '/office-automation-2025-1.jpg',
         label: "Search Efficiency",
         title: "檔案位置，系統幫你記",
         desc: "關鍵字即刻調用，告別深層資料夾。讓團隊專注決策而非翻找。",
         quote: "讓系統成為團隊的外部大腦。"
       },
       {
-        src: 'https://picsum.photos/id/119/1000/600',
+        src: '/office-automation-2025-2.jpg',
         label: "Data Integrity",
         title: "標準流程，內化於系統",
         desc: "引導式填寫確保資料正確，從源頭終結格式錯誤與漏填。",
@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
     title: "個人投資紀錄系統",
     category: "Dashboard / 數據視覺化",
     shortDesc: "終結手動算帳。自動運算庫存與損益，將複雜數據轉化為直覺的決策圖表。",
-    thumbnail: "https://picsum.photos/id/48/800/600",
+    thumbnail: "/investment-dashboard-2023.png",
     role: "系統規劃、全端開發與介面設計",
     timeline: "2023",
     heroHeadline: "數據自動運算，投資決策不再憑感覺",
@@ -154,14 +154,14 @@ export const PROJECTS: Project[] = [
 
     screenshots: [
       { 
-        src: "https://picsum.photos/id/1/1000/600", 
+        src: "/investment-dashboard-2023-1.png", 
         label: "Visual Insight",
         title: "掌握全局，先抓重點",
         desc: "KPI 卡片讓今日績效一目瞭然。過濾雜訊，確保決策時保有全局觀。",
         quote: "好的介面能幫你優先看到最重要的事。"
       },
       { 
-        src: "https://picsum.photos/id/20/1000/600", 
+        src: "/investment-dashboard-2023-2.png", 
         label: "Risk Control",
         title: "視覺化你的風險權重",
         desc: "捨棄表格，用圓餅圖呈現資產分佈。即時判斷是否需要進行再平衡。",
@@ -199,7 +199,7 @@ export const PROJECTS: Project[] = [
     title: 'CRM 與任務派遣系統',
     category: '內部管理系統',
     shortDesc: '整合客戶與車隊資訊，消除調度混亂。讓派車流程標準化、精準且可控。',
-    thumbnail: 'https://picsum.photos/id/111/800/600',
+    thumbnail: '/crm-dispatch-system-2022.png',
     role: '系統規劃、全端開發與介面設計',
     timeline: '2022',
     heroHeadline: '調度零失誤，效率看得見',
@@ -226,14 +226,14 @@ export const PROJECTS: Project[] = [
 
     screenshots: [
       {
-        src: 'https://picsum.photos/id/133/1000/600',
+        src: '/crm-dispatch-system-2022-1.png',
         label: "Process Control",
         title: "一頁掌控調度全局",
         desc: "整合備註、狀態與路徑。內勤無需切換分頁，即可掌握所有關鍵細節。",
         quote: "讓調度專注於決策，而非找資料。"
       },
       {
-        src: 'https://picsum.photos/id/192/1000/600',
+        src: '/crm-dispatch-system-2022-2.png',
         label: "Risk Management",
         title: "守護品質的預警線",
         desc: "系統在開單當下自動偵測衝突並標註，確保每一趟服務都能準時達成。",
@@ -271,7 +271,7 @@ export const PROJECTS: Project[] = [
     title: '開發諮詢與規劃',
     category: '顧問服務 / 規劃',
     shortDesc: '想法轉藍圖。降低開發風險與成本，寫 Code 前先釐清邏輯，確保預算精準投放。',
-    thumbnail: 'https://picsum.photos/id/3/800/600',
+    thumbnail: '/consulting-planning-architecture.jpg',
     role: '需求收斂與系統架構設計',
     timeline: '持續中',
     heroHeadline: '不再走冤枉路。將模糊構想，轉化為邏輯清晰的執行藍圖',
@@ -298,14 +298,14 @@ export const PROJECTS: Project[] = [
 
     screenshots: [
       {
-        src: 'https://picsum.photos/id/60/1000/600',
+        src: '/consulting-planning-architecture-1.jpg',
         label: "Logic Distillation",
         title: "在寫程式碼前先對齊",
         desc: "透過情境模擬找出「以為想通了」的盲點。確保開發出的每個功能都有其必要。 ",
         quote: "在寫程式碼前，先解決邏輯矛盾。"
       },
       {
-        src: 'https://picsum.photos/id/96/1000/600',
+        src: '/consulting-planning-architecture-2.jpg',
         label: "Actionable Roadmap",
         title: "將焦慮化為具體藍圖",
         desc: "將模糊願景拆解為具體任務。讓你清楚每一步該做什麼，找回對專案掌控感。",
