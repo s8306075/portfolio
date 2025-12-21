@@ -12,7 +12,7 @@ import {
   RefreshCw,
   Zap,
   ArrowRight,
-  Mail,
+  FileText,
   User,
   Heart,
   Cpu,
@@ -125,29 +125,31 @@ const About = () => {
           <div className="lg:col-span-7">
             <FadeIn variant="up">
               <h2 className="text-3xl md:text-5xl font-bold text-charcoal mb-2 leading-tight flex items-center gap-3">
-                <User className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
+                <User className="w-8 h-8 text-navy/80 opacity-90" aria-hidden="true" />
                 魚也是貓
               </h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">協助你釐清思緒的獨立開發者</span>
-              <div className="w-16 h-1 bg-sunfire mb-10 rounded-full" aria-hidden="true"></div>
+              <span className="block text-lg font-medium text-charcoal/80 mb-6">協助你釐清思緒的獨立開發者</span>
+              <div className="w-16 h-1 bg-taupe mb-10 rounded-full" aria-hidden="true"></div>
             </FadeIn>
 
              <div className="space-y-6 text-lg text-umber leading-relaxed mb-8">
-               <FadeIn variant="fade" delay={100}>
-                 <p>
-                   10 年的全端開發經驗，讓我學到的最重要一課是：專案失敗往往不是因為技術問題，而是「需求沒想清楚」。轉型為獨立開發者後，我將這份經驗轉化為對您的價值：協助您在動手開發前，先理清邏輯，大幅降低試錯成本與開發風險。
-                 </p>
-               </FadeIn>
-               <FadeIn variant="fade" delay={200}>
-                 <p>
-                   與我合作，您不會感受到被技術壓著跑的壓力。我習慣用淺顯易懂的語言溝通，引導您說出真正的痛點。我交付的不只是程式碼，而是一套邏輯自洽、能隨業務成長的系統解決方案，讓您能安心專注於業務發展。
-                 </p>
-               </FadeIn>
-               <FadeIn variant="fade" delay={250}>
-                 <p className="font-semibold text-smoke/90 border-l-4 border-taupe/40 pl-4 py-1">
-                   您現在瀏覽的這個網站，正是由我從無到有親手打造。從資訊架構的梳理、內容策略的佈局，到設計系統與前端程式碼的實作，這不僅是作品，更是我能為您提供的完整價值的體現——不僅是執行者，更是能顧全大局的規劃夥伴。
-                 </p>
-               </FadeIn>
+              <FadeIn variant="fade" delay={100}>
+                <p>
+                  專案卡關，往往不是技術無法達成，而是「需求沒有想清楚」。
+                  將 10 年實戰經驗，轉化為對焦商業目標的敏銳度。在寫下第一行程式碼前，先協助收斂邏輯，確保每一分預算都花在刀口上，大幅降低開發風險。
+                </p>
+              </FadeIn>
+              <FadeIn variant="fade" delay={200}>
+                <p>
+                  合作過程不需要懂程式語言，只需專注於業務目標。
+                  擅長以淺顯易懂的方式溝通，將模糊的想法轉化為具體的執行方案。交付的不只是功能，而是一套邏輯嚴謹、穩定好維護，能真正解決問題的商業系統。
+                </p>
+              </FadeIn>
+              <FadeIn variant="fade" delay={250}>
+                <p className="font-semibold text-charcoal/90 border-l-4 border-taupe pl-6 py-2">
+                  此網站即是最佳實證——從資訊架構梳理、內容策略到全端開發實作，展示我如何協助想快速落地或需要精準規劃的專案順利完成。
+                </p>
+              </FadeIn>
              </div>
 
             <FadeIn variant="fade" delay={300}>
@@ -156,10 +158,15 @@ const About = () => {
 
             <FadeIn variant="fade" delay={350}>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href={`mailto:${PROFILE.email}`} aria-label="Send Email">
+                <a 
+                  href={PROFILE.contactFormLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Contact via Form"
+                >
                   <Button variant="primary">
-                    <Mail className="w-4 h-4 mr-2" aria-hidden="true" />
-                    聯絡我
+                    <FileText className="w-4 h-4 mr-2" aria-hidden="true" />
+                    立即預約
                   </Button>
                 </a>
                 <Link href="/portfolio" aria-label="View Portfolio">
@@ -184,8 +191,8 @@ const About = () => {
                 <Heart className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
                 我相信的事 / 我如何工作
               </h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">與我合作，您將獲得的價值</span>
-              <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
+              <span className="block text-lg font-medium text-charcoal/80 mb-6">與我合作，您將獲得的價值</span>
+              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
             </FadeIn>
           </div>
 
@@ -203,7 +210,7 @@ const About = () => {
                           </div>
                        </FadeIn>
                        <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{item.title}</h3>
-                       <p className="text-smoke/90 leading-relaxed text-sm">
+                       <p className="text-umber leading-relaxed text-sm">
                          {item.desc}
                        </p>
                     </article>
@@ -228,7 +235,7 @@ const About = () => {
                           </div>
                        </FadeIn>
                        <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{item.title}</h3>
-                       <p className="text-smoke/90 leading-relaxed text-sm">
+                       <p className="text-umber leading-relaxed text-sm">
                          {item.desc}
                        </p>
                     </article>
@@ -255,15 +262,15 @@ const About = () => {
                 技術能力
               </h2>
               <span className="block text-lg font-medium text-charcoal/90 mb-6">打造現代化系統的工具箱</span>
-              <div className="w-16 h-1 bg-sunfire mb-10 rounded-full" aria-hidden="true"></div>
+              <div className="w-16 h-1 bg-taupe mb-10 rounded-full" aria-hidden="true"></div>
             </FadeIn>
 
             <dl className="space-y-8 text-umber leading-relaxed">
               {/* Backend */}
               <FadeIn variant="fade" delay={100}>
                 <div className="mb-3 flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sunfire/60 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
-                  <Database className="w-4 h-4 text-smoke/50" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
+                  <Database className="w-4 h-4 text-navy/60" aria-hidden="true" />
                   <dt className="text-smoke font-bold">後端核心</dt>
                 </div>
                 <dd className="pl-5">
@@ -276,8 +283,8 @@ const About = () => {
               {/* Frontend */}
               <FadeIn variant="fade" delay={200}>
                 <div className="mb-3 flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sunfire/60 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
-                  <Layout className="w-4 h-4 text-smoke/50" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
+                  <Layout className="w-4 h-4 text-navy/60" aria-hidden="true" />
                   <dt className="text-smoke font-bold">前端互動</dt>
                 </div>
                 <dd className="pl-5">
@@ -290,8 +297,8 @@ const About = () => {
               {/* Architecture */}
               <FadeIn variant="fade" delay={300}>
                 <div className="mb-3 flex items-center gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sunfire/60 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
-                  <Server className="w-4 h-4 text-smoke/50" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
+                  <Server className="w-4 h-4 text-navy/60" aria-hidden="true" />
                   <dt className="text-smoke font-bold">DevOps 與工具</dt>
                 </div>
                 <dd className="pl-5">
@@ -308,7 +315,7 @@ const About = () => {
             {SKILL_GROUPS.map((group, idx) => (
               <FadeIn key={idx} variant="fade" delay={200 + (idx * 100)}>
                 <div>
-                  <h4 className="text-sm font-bold text-navy/90 uppercase tracking-wider mb-2 pl-1">
+                  <h4 className="text-sm font-bold text-navy/70 uppercase tracking-wider mb-2 pl-1">
                     {group.category}
                   </h4>
                   <div className="flex items-center gap-1 mb-5 ml-1" aria-hidden="true">
@@ -317,7 +324,7 @@ const About = () => {
 
                   <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" aria-label={`Skills in ${group.category}`}>
                     {group.items.map((skill, i) => (
-                      <li key={i} className="bg-taupe/5 rounded-xl border border-taupe/15 shadow-sm px-4 py-2 text-umber text-center text-sm font-medium hover:scale-[1.02] hover:border-taupe/40 hover:shadow-md transition-all duration-300 cursor-default">
+                      <li key={i} className="bg-white/50 rounded-xl border border-taupe/20 shadow-sm px-4 py-2 text-umber text-center text-sm font-medium hover:scale-[1.02] hover:border-taupe/50 hover:shadow-md transition-all duration-300 cursor-default">
                         {skill}
                       </li>
                     ))}
@@ -331,7 +338,7 @@ const About = () => {
       </section>
 
       {/* 4. Experience Section */}
-      <section className="px-6 py-16 bg-beige border-t border-taupe/20" aria-labelledby="experience-heading">
+      <section className="px-6 py-16 bg-white border-t border-taupe/20" aria-labelledby="experience-heading">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
@@ -341,13 +348,13 @@ const About = () => {
                 專業經歷
               </h2>
               <span className="block text-lg font-medium text-charcoal/90 mb-6">持續累積的實戰軌跡</span>
-              <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
+              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
             </FadeIn>
           </div>
 
           <div className="relative">
             {/* Center Line */}
-            <div className="hidden md:block absolute left-24 md:left-32 top-0 bottom-0 w-px bg-taupe/30" aria-hidden="true"></div>
+            <div className="hidden md:block absolute left-24 md:left-32 top-0 bottom-0 w-px bg-taupe/40" aria-hidden="true"></div>
 
             {/* Desktop View: Timeline */}
             <ol className="hidden md:block space-y-12 py-4">
@@ -368,9 +375,9 @@ const About = () => {
 
                       {/* Right: Card */}
                       <article className="flex-1 ml-6 md:ml-10">
-                        <div className="bg-beige p-6 rounded-2xl shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:-translate-y-1 cursor-default border border-taupe/30">
+                        <div className="bg-beige/50 p-6 rounded-2xl shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:-translate-y-1 cursor-default border border-taupe/30">
                           <h3 className="font-bold text-charcoal text-lg mb-1">{exp.title}</h3>
-                          <div className="text-sm font-semibold text-sunfire mb-3">{exp.company}</div>
+                          <div className="text-sm font-semibold text-navy/60 mb-3">{exp.company}</div>
                           <p className="text-umber text-sm leading-relaxed line-clamp-2">
                             {exp.description}
                           </p>

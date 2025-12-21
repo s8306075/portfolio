@@ -57,7 +57,9 @@ const Navigation = () => {
             );
           })}
           <a 
-            href="mailto:hello@alexchen.dev" 
+            href={PROFILE.contactFormLink} 
+            target="_blank"
+            rel="noopener noreferrer"
             className="ml-4"
             role="menuitem"
           >

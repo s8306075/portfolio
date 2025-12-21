@@ -18,7 +18,7 @@ const Button = ({
   const variants = {
     primary: "bg-sunfire text-white border border-transparent shadow-md shadow-sunfire/25 hover:bg-sunfire/90 hover:shadow-lg hover:shadow-sunfire/40 hover:-translate-y-0.5 focus:ring-sunfire transition-all",
     secondary: "bg-navy text-white hover:bg-slate-700 focus:ring-navy",
-    outline: "bg-transparent border-[1.5px] border-taupe/90 text-charcoal hover:border-taupe hover:bg-taupe/25 hover:shadow-[0_2px_6px_rgba(0,0,0,0.08)] focus:ring-taupe/40"
+    outline: "bg-transparent border border-taupe text-charcoal hover:border-navy hover:bg-white/40 hover:shadow-[0_2px_6px_rgba(0,0,0,0.08)] focus:ring-navy/40"
   };
 
   return (

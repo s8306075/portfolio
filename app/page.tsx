@@ -54,32 +54,36 @@ const Home = () => {
           <div className="order-2 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left">
             <FadeIn delay={100} variant="up">
               {/* Structure: H1 + Sub + Bar */}
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-charcoal mb-6 leading-[1.1] tracking-tight">
-                你不需懂程式碼，<br />只要專注<br />
+              <h1 className="text-4xl md:text-6xl lg:text-6xl font-bold text-charcoal mb-6 leading-[1.1] tracking-tight">
+                專案缺
                 <span className="relative inline-block mt-2 z-10">
-                   商業目標
+                   決策
                    <span className="absolute left-0 bottom-2 w-full h-4 bg-sunfire/20 -z-10 rounded-sm transform -rotate-1 skew-x-12" aria-hidden="true"></span>
                 </span>
+                ，<br />再多技術也無法落地<br />
               </h1>
               
               <p className="text-lg md:text-xl text-umber max-w-xl mb-6 leading-relaxed">
-                讓我協助你將模糊的需求，收斂為邏輯清晰的執行藍圖。打造穩定、好用，且真正能解決商業問題的數位資產。
+                每個專案都值得有清晰的架構與可落地方案。<br />透過穩定流程與邏輯決策，讓專案順暢進行，專注於真正的商業目標。
               </p>
-
-              {/* Accent Bar */}
-              <div className="w-20 h-1.5 bg-sunfire rounded-full mb-10" aria-hidden="true"></div>
             </FadeIn>
 
             <FadeIn delay={300} variant="fade">
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                <Link href="/portfolio" className="w-full sm:w-auto" aria-label="View Portfolio">
+                <a 
+                  href={PROFILE.contactFormLink} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="聯絡我"
+                  className="w-full sm:w-auto"
+                >
                   <Button variant="primary" fullWidth className="h-14 px-8 text-lg">
-                    瀏覽精選作品
+                    確認專案可行性 →
                   </Button>
-                </Link>
-                <Link href="/services" className="w-full sm:w-auto" aria-label="View Services">
+                </a>
+                <Link href="/portfolio" className="w-full sm:w-auto" aria-label="View Portfolio">
                   <Button variant="outline" fullWidth className="h-14 px-8 text-lg">
-                    了解服務內容
+                    瀏覽精選作品
                   </Button>
                 </Link>
               </div>
@@ -105,7 +109,7 @@ const Home = () => {
                 <div className="flex flex-1 p-6 gap-6 bg-beige/80 backdrop-blur-sm">
                     {/* Sidebar Mockup */}
                     <div className="w-16 hidden md:flex flex-col gap-4 pt-2">
-                      <div className="w-10 h-10 bg-sunfire/10 rounded-xl flex items-center justify-center text-sunfire">
+                      <div className="w-10 h-10 bg-sunfire/10 rounded-xl flex items-center justify-center text-sunfire/60">
                         <Layers size={20} />
                       </div>
                       <div className="w-10 h-10 hover:bg-sand rounded-xl flex items-center justify-center text-navy/40">
@@ -123,12 +127,12 @@ const Home = () => {
                           <div className="flex-1 bg-beige rounded-2xl p-4 border border-taupe/30">
                             <div className="w-8 h-8 bg-white rounded-lg mb-2 shadow-sm"></div>
                             <div className="w-12 h-2 bg-navy/10 rounded-full mb-2"></div>
-                            <div className="w-20 h-4 bg-navy/80 rounded-full"></div>
+                            <div className="w-20 h-4 bg-navy/50 rounded-full"></div>
                           </div>
                           <div className="flex-1 bg-beige rounded-2xl p-4 border border-taupe/30">
                             <div className="w-8 h-8 bg-white rounded-lg mb-2 shadow-sm"></div>
                             <div className="w-12 h-2 bg-navy/10 rounded-full mb-2"></div>
-                            <div className="w-20 h-4 bg-sunfire/60 rounded-full"></div>
+                            <div className="w-20 h-4 bg-sunfire/40 rounded-full"></div>
                           </div>
                       </div>
 
@@ -136,7 +140,7 @@ const Home = () => {
                       <div className="flex-1 bg-sand rounded-2xl border border-taupe/30 p-4 flex items-end justify-between gap-2 px-6 pb-2">
                           <div className="w-full bg-navy/10 h-[40%] rounded-t-md"></div>
                           <div className="w-full bg-navy/20 h-[60%] rounded-t-md"></div>
-                          <div className="w-full bg-sunfire/60 h-[80%] rounded-t-md relative group">
+                          <div className="w-full bg-sunfire/40 h-[80%] rounded-t-md relative group">
                               <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-navy text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                                 Optimization
                               </div>
@@ -153,59 +157,11 @@ const Home = () => {
                       <CheckCircle2 size={14} className="text-leaf" />
                     </div>
                     <div>
-                      <div className="h-1.5 w-16 bg-navy/60 rounded-full mb-1.5"></div>
+                      <div className="h-1.5 w-16 bg-navy/50 rounded-full mb-1.5"></div>
                       <div className="h-1 w-24 bg-navy/20 rounded-full"></div>
                     </div>
                 </div>
               </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Preview */}
-      <section className="py-24 px-6 bg-white relative z-20" aria-labelledby="core-services-heading">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-16">
-            <FadeIn variant="up">
-              <h2 id="core-services-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2">專注於解決真實問題</h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">不只是開發功能，更在乎系統能否為您帶來價值</span>
-              <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
-            </FadeIn>
-          </div>
-
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {SERVICES.slice(0, 3).map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <li key={service.id}>
-                  <FadeIn className="h-full" delay={index * 150} variant="fade">
-                    <div className="p-8 rounded-3xl bg-sand border border-taupe shadow-sm hover:shadow-xl transition-all duration-300 h-full group flex flex-col items-center text-center">
-                      <FadeIn variant="scale" delay={index * 150 + 100}>
-                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-navy mb-6 group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 transition-all duration-300 border border-transparent group-hover:border-white/20">
-                          <Icon className="w-6 h-6 transition-colors" aria-hidden="true" />
-                        </div>
-                      </FadeIn>
-                      <FadeIn variant="up" delay={index * 150 + 150}>
-                        <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{service.title}</h3>
-                      </FadeIn>
-                      <p className="text-umber leading-relaxed">{service.shortDescription || service.description}</p>
-                    </div>
-                  </FadeIn>
-                </li>
-              );
-            })}
-          </ul>
-
-          <div className="mt-16 text-center">
-            <FadeIn variant="fade" delay={400}>
-              <Link href="/services" aria-label="See All Services">
-                <Button variant="outline" className="px-8">
-                  查看完整服務內容
-                  <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
-                </Button>
-              </Link>
             </FadeIn>
           </div>
         </div>
@@ -218,7 +174,7 @@ const Home = () => {
             <FadeIn variant="up">
               <h2 id="featured-portfolio-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2">精選案例</h2>
               <span className="block text-lg font-medium text-charcoal/90 mb-6">從內部工具到商業平台的實戰成果</span>
-              <div className="w-16 h-1 bg-sunfire mx-auto rounded-full" aria-hidden="true"></div>
+              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
             </FadeIn>
           </div>
 
@@ -261,22 +217,22 @@ const Home = () => {
               </div>
               {/* Floating Badge: Top Left */}
               <div className="absolute -top-8 -left-4 md:-left-12 z-20 animate-float bg-beige p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-sand">
-                <div className="w-10 h-10 bg-sunfire-50 rounded-full flex items-center justify-center text-sunfire">
+                <div className="w-10 h-10 bg-navy/5 rounded-full flex items-center justify-center text-navy">
                   <Code2 size={20} aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-xs text-smoke font-bold uppercase tracking-wider">Experience</p>
+                  <p className="text-xs text-umber/60 font-bold uppercase tracking-wider">Experience</p>
                   <p className="text-navy font-bold">10+ Years</p>
                 </div>
               </div>
 
               {/* Floating Badge: Bottom Right */}
               <div className="absolute -bottom-8 -right-4 md:-right-8 z-20 animate-floatDelayed bg-taupe/20 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-3 border border-beige/60">
-                <div className="w-10 h-10 bg-sand/40 rounded-full flex items-center justify-center text-leaf">
+                <div className="w-10 h-10 bg-leaf/5 rounded-full flex items-center justify-center text-leaf">
                   <Layers size={20} aria-hidden="true" />
                 </div>
                 <div>
-                  <p className="text-[10px] md:text-xs text-navy/90 font-semibold uppercase tracking-wider">Architecture</p>
+                  <p className="text-[10px] md:text-xs text-umber/60 font-semibold uppercase tracking-wider">Architecture</p>
                   <p className="text-navy font-bold">Solid & Scalable</p>
                 </div>
               </div>
@@ -295,7 +251,7 @@ const Home = () => {
               <span className="block text-lg font-medium text-charcoal/90 mb-6">
                 讓溝通回歸邏輯，讓開發回歸商業價值
               </span>
-              <div className="w-16 h-1 bg-sunfire mb-10 rounded-full" aria-hidden="true"></div>
+              <div className="w-16 h-1 bg-taupe mb-10 rounded-full" aria-hidden="true"></div>
             </FadeIn>
 
             <FadeIn variant="fade" delay={150}>
@@ -306,7 +262,7 @@ const Home = () => {
 
             <FadeIn variant="fade" delay={300}>
               <p className="text-lg text-umber leading-relaxed mb-8">
-                我不追求最花俏的技術，只追求最穩健的解法。對我來說，一個好系統的標準很簡單：好用、穩定，並且真正幫你省下時間與成本。
+                我相信好系統的核心是穩定、好用，並真正幫助專案達成商業目標。<br />透過清晰架構與邏輯流程，讓複雜想法變成可落地方案。
               </p>
             </FadeIn>
 
@@ -332,6 +288,54 @@ const Home = () => {
                   </Button>
                 </Link>
               </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Preview */}
+      <section className="py-24 px-6 bg-white relative z-20" aria-labelledby="core-services-heading">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <FadeIn variant="up">
+              <h2 id="core-services-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2">專注於解決真實問題</h2>
+              <span className="block text-lg font-medium text-charcoal/90 mb-6">不只是開發功能，更在乎系統能否為您帶來價值</span>
+              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
+            </FadeIn>
+          </div>
+
+          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {SERVICES.slice(0, 3).map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <li key={service.id}>
+                  <FadeIn className="h-full" delay={index * 150} variant="fade">
+                    <div className="p-8 rounded-3xl bg-sand border border-taupe shadow-sm hover:shadow-xl transition-all duration-300 h-full group flex flex-col items-center text-center">
+                      <FadeIn variant="scale" delay={index * 150 + 100}>
+                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-navy mb-6 group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 transition-all duration-300 border border-transparent group-hover:border-navy/10">
+                          <Icon className="w-6 h-6 transition-colors" aria-hidden="true" />
+                        </div>
+                      </FadeIn>
+                      <FadeIn variant="up" delay={index * 150 + 150}>
+                        <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{service.title}</h3>
+                      </FadeIn>
+                      <p className="text-umber leading-relaxed">{service.shortDescription || service.description}</p>
+                    </div>
+                  </FadeIn>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-16 text-center">
+            <FadeIn variant="fade" delay={400}>
+              <Link href="/services" aria-label="See All Services">
+                <Button variant="outline" className="px-8">
+                  查看完整服務內容
+                  <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
+                </Button>
+              </Link>
             </FadeIn>
           </div>
         </div>

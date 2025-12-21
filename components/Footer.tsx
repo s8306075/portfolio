@@ -1,4 +1,4 @@
-import { Mail, Facebook, Instagram } from 'lucide-react';
+import { FileText, Facebook, Instagram } from 'lucide-react';
 import { PROFILE } from '../constants';
 import FadeIn from './FadeIn';
 
@@ -27,11 +27,13 @@ const Footer = () => {
               <ul className="flex items-center gap-4">
                 <li>
                   <a 
-                    href={`mailto:${PROFILE.email}`} 
-                    className="p-3 bg-white rounded-full text-navy shadow-sm border border-transparent hover:border-sunfire/20 hover:text-sunfire hover:shadow-md transition-all duration-300 group block"
-                    aria-label="Send email to 魚也是貓"
+                    href={PROFILE.contactFormLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white rounded-full text-navy shadow-sm border border-transparent hover:border-navy/20 hover:text-navy hover:shadow-md transition-all duration-300 group block"
+                    aria-label="Open contact form"
                   >
-                    <Mail size={20} className="group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                    <FileText size={20} className="group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
                   </a>
                 </li>
                 <li>

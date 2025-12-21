@@ -1,5 +1,5 @@
 import Button from './Button';
-import { Mail, ArrowRight, MessageSquare, Briefcase, Code, Heart, Wrench, Settings } from 'lucide-react';
+import { FileText, ArrowRight, MessageSquare, Briefcase, Code, Heart, Wrench, Settings } from 'lucide-react';
 import { PROFILE } from '../constants';
 import Link from "next/link";
 import FadeIn from './FadeIn';
@@ -26,8 +26,8 @@ const ContactCTA = ({ variant = 'home' }: ContactCTAProps) => {
       iconBg: "bg-white",
       title: "準備好梳理你的需求了嗎？",
       desc: "專案常常卡在「不知道從何下手」。讓我協助你將複雜的想法收斂為明確的執行步驟，打造穩定好用的系統。",
-      primaryBtnText: "聯絡我",
-      secondaryBtnText: "瀏覽作品集",
+      primaryBtnText: "立即梳理需求",
+      secondaryBtnText: "先看看作品",
       secondaryBtnLink: "/portfolio",
       decor: "warm-glow"
     },
@@ -38,7 +38,7 @@ const ContactCTA = ({ variant = 'home' }: ContactCTAProps) => {
       iconBg: "bg-white",
       title: "想打造同樣穩健的數位資產？",
       desc: "好的系統不只功能強大，更要穩定好維護。讓我協助你建立可靠的系統架構，為長遠發展打好地基。",
-      primaryBtnText: "聯絡我",
+      primaryBtnText: "立即諮詢",
       secondaryBtnText: "查看更多服務",
       secondaryBtnLink: "/services",
       decor: "clean"
@@ -49,8 +49,8 @@ const ContactCTA = ({ variant = 'home' }: ContactCTAProps) => {
       iconColor: "text-sunfire",
       iconBg: "bg-orange-50",
       title: "從「想法」到「落地」",
-      desc: "每個偉大的系統都始於一次深度的對談。告訴我你的商業目標，我們一起規劃出最適合的技術路徑。",
-      primaryBtnText: "聯絡我討論需求",
+      desc: "如果你重視系統長期價值與清晰流程，告訴我你的商業目標，我們一起規劃最適合的技術路徑。",
+      primaryBtnText: "提交需求討論",
       secondaryBtnText: "查看作品案例",
       secondaryBtnLink: "/portfolio",
       decor: "texture"
@@ -99,14 +99,19 @@ const ContactCTA = ({ variant = 'home' }: ContactCTAProps) => {
             <p className="text-lg text-charcoal/80 font-medium mb-8 block max-w-2xl mx-auto leading-relaxed">
               {currentConfig.desc}
             </p>
-            <div className="w-16 h-1 bg-sunfire mx-auto rounded-full mb-10 opacity-80"></div>
+            <div className="w-16 h-1 bg-taupe mx-auto rounded-full mb-10 opacity-80"></div>
           </FadeIn>
           
           <FadeIn variant="fade" delay={150}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={`mailto:${PROFILE.email}`} aria-label={currentConfig.primaryBtnText}>
+              <a 
+                href={PROFILE.contactFormLink} 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={currentConfig.primaryBtnText}
+              >
                 <Button variant="primary">
-                  <Mail className="w-4 h-4 mr-2" />
+                  <FileText className="w-4 h-4 mr-2" />
                   {currentConfig.primaryBtnText}
                 </Button>
               </a>

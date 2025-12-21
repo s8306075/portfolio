@@ -43,14 +43,14 @@ const Portfolio = () => {
               精選實戰案例
             </h1>
             <p className="text-lg text-charcoal/90 font-medium mb-6">
-              不只是作品展示，更是解決真實商業問題的證明
+              展示從需求到完成的真實專案，記錄每個過程中的決策與思路。
             </p>
-            <div className="w-16 h-1 bg-sunfire mx-auto rounded-full mb-8"></div>
+            <div className="w-16 h-1 bg-taupe mx-auto rounded-full mb-8"></div>
           </FadeIn>
           <FadeIn variant="fade" delay={150}>
             <p className="text-lg text-charcoal/90 max-w-2xl mx-auto leading-relaxed">
-              每一個專案都是我對「降低風險」與「提升效率」的實踐。
-              點擊卡片，看看我如何協助客戶將複雜的需求，轉化為直覺好用的數位工具。
+              每個專案都記錄了解決問題的過程，從釐清需求到建立穩定可維護的系統。<br />
+              透過案例可以看到如何將想法整理成清晰、可執行的數位工具，幫助專案順利落地。
             </p>
           </FadeIn>
         </div>
