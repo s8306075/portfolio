@@ -63,7 +63,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                </div>
 
                {/* Hover Prompt */}
-               <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 text-sm font-semibold text-sunfire/70 whitespace-nowrap ml-2" aria-hidden="true">
+               <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 text-sm font-semibold text-navy/70 whitespace-nowrap ml-2" aria-hidden="true">
                   查看案例 →
                </div>
             </div>

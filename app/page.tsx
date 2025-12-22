@@ -5,7 +5,7 @@ import Button from '@/components/Button';
 import ProjectCard from '@/components/ProjectCard';
 import ContactCTA from '@/components/ContactCTA';
 import FadeIn from '@/components/FadeIn';
-import { PROJECTS, PROFILE, SERVICES } from '@/constants';
+import { PROJECTS, PROFILE, SERVICES, INSIGHTS } from '@/constants';
 
 export const metadata = {
   title: `${PROFILE.name} | 聽得懂需求的獨立全端開發者`,
@@ -168,7 +168,7 @@ const Home = () => {
       </section>
 
       {/* Featured Portfolio */}
-      <section className="py-24 px-6 bg-beige" aria-labelledby="featured-portfolio-heading">
+      <section className="py-24 px-6 bg-white" aria-labelledby="featured-portfolio-heading">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <FadeIn variant="up">
@@ -198,8 +198,67 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Insights Preview */}
+      <section className="py-32 px-6 bg-sand/30 border-y border-taupe/20" aria-labelledby="insights-preview-heading">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <FadeIn variant="up">
+              <h2 id="insights-preview-heading" className="text-3xl md:text-4xl font-bold text-navy mb-3">實務分享</h2>
+              <span className="block text-lg font-medium text-charcoal/80 mb-8">分享需求收斂與系統落地的實戰觀點</span>
+              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
+            </FadeIn>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            {INSIGHTS.slice(0, 2).map((insight, idx) => (
+              <FadeIn key={insight.id} delay={idx * 150} variant="fade">
+                <Link href={`/insights/${insight.id}`} className="group block h-full">
+                  <article className="bg-white rounded-[1.5rem] p-6 md:p-8 border border-taupe/30 hover:border-navy/10 hover:shadow-xl transition-all duration-500 h-full flex flex-col relative">
+                    
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-navy/50 uppercase tracking-widest bg-beige px-3 py-1 rounded-full border border-taupe/20">
+                        {insight.category}
+                      </span>
+                      <span className="text-[10px] text-stone-400 font-bold uppercase tracking-widest">
+                        {insight.publishDate}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-charcoal mb-4 group-hover:text-navy transition-colors leading-tight">
+                      {insight.title}
+                    </h3>
+
+                    <p className="text-stone-600 text-sm leading-relaxed mb-8 flex-grow font-medium line-clamp-3">
+                      {insight.summary}
+                    </p>
+
+                    <div className="mt-auto pt-6 border-t border-taupe/20 flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">{insight.readTime}</span>
+                      <div className="flex items-center gap-2 text-navy text-xs font-bold group-hover:gap-4 transition-all">
+                        <span>閱讀全文</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+
+          <div className="mt-20 text-center">
+            <FadeIn variant="fade" delay={200}>
+              <Link href="/insights">
+                <Button variant="outline" className="px-10">
+                  瀏覽所有觀點 <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
+                </Button>
+              </Link>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* About Me Section */}
-      <section className="py-24 px-6 bg-white overflow-hidden relative" aria-labelledby="about-me-preview-heading">
+      <section className="py-24 px-6 bg-beige overflow-hidden relative" aria-labelledby="about-me-preview-heading">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Image */}
           <FadeIn variant="fade" className="relative order-2 lg:order-1 flex justify-center">
@@ -311,14 +370,14 @@ const Home = () => {
               return (
                 <li key={service.id}>
                   <FadeIn className="h-full" delay={index * 150} variant="fade">
-                    <div className="p-8 rounded-3xl bg-sand border border-taupe shadow-sm hover:shadow-xl transition-all duration-300 h-full group flex flex-col items-center text-center">
+                    <div className="p-10 rounded-3xl bg-sand border border-taupe shadow-sm hover:shadow-lg transition-all duration-300 h-full group flex flex-col items-center text-center">
                       <FadeIn variant="scale" delay={index * 150 + 100}>
-                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-sm text-navy mb-6 group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 transition-all duration-300 border border-transparent group-hover:border-navy/10">
-                          <Icon className="w-6 h-6 transition-colors" aria-hidden="true" />
+                        <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm text-navy mb-8 transition-all duration-300 border border-taupe/10">
+                          <Icon className="w-7 h-7" aria-hidden="true" />
                         </div>
                       </FadeIn>
                       <FadeIn variant="up" delay={index * 150 + 150}>
-                        <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{service.title}</h3>
+                        <h3 className="text-xl font-bold text-navy mb-4 group-hover:scale-105 transition-transform duration-300 origin-center">{service.title}</h3>
                       </FadeIn>
                       <p className="text-umber leading-relaxed">{service.shortDescription || service.description}</p>
                     </div>
