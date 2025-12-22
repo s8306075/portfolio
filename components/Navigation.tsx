@@ -14,6 +14,7 @@ const Navigation = () => {
     { name: '首頁', path: '/' },
     { name: '專業服務', path: '/services' },
     { name: '作品集', path: '/portfolio' },
+    { name: '實務分享', path: '/insights' },
     { name: '關於我', path: '/about' },
   ];
 
