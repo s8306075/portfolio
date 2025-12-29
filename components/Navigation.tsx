@@ -124,7 +124,7 @@ const Navigation = () => {
         })}
         
         <a 
-          href="mailto:hello@alexchen.dev" 
+          href="https://docs.google.com/forms/d/e/1FAIpQLScsgTk6bvI5JeNXTEq8o3oarURW0i8LltcyASTl9a8172mZeQ/viewform?usp=sharing&ouid=117901482318143492061" 
           className="text-lg font-medium text-sunfire pt-6 mt-4 border-t border-taupe/60 flex items-center justify-between group"
           role="menuitem"
           onClick={() => setIsMenuOpen(false)}
