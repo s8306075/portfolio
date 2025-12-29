@@ -2,12 +2,28 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { PROFILE } from '@/constants';
+import { useState, useEffect } from 'react';
 
 const Navigation = () => {
   // Navigation Links
   const location = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Close menu when location changes (fallback)
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
 
   // Navigation Links
   const navLinks = [
@@ -29,6 +45,7 @@ const Navigation = () => {
         <Link 
           href="/" 
           className="text-2xl font-bold text-navy tracking-tight group"
+          onClick={() => setIsMenuOpen(false)}
           aria-label={`${PROFILE.name} - Home`}
         >
           {PROFILE.name}<span className="text-sunfire group-hover:animate-pulse">.</span>
@@ -64,18 +81,20 @@ const Navigation = () => {
             className="ml-4"
             role="menuitem"
           >
-             <span className="px-5 py-2 text-sm font-medium text-sunfire border border-sunfire rounded-full hover:bg-sunfire hover:text-white transition-colors duration-300">
+             <span className="px-5 py-2 text-sm font-medium text-sunfire border border-sunfire rounded-full hover:bg-sunfire hover:text-white transition-colors duration-300 cursor-pointer">
                聯絡我
              </span>
           </a>
         </div>
 
-        {/* Mobile Toggle (CSS Checkbox Hack) */}
-        <div className="md:hidden flex items-center">
-          <label htmlFor="mobile-menu-toggle" className="text-navy p-2 cursor-pointer focus:outline-none" aria-label="Toggle menu">
-            <Menu size={24} aria-hidden="true" className="block peer-checked:hidden" />
-          </label>
-        </div>
+        {/* Mobile Toggle Button */}
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden text-navy p-2 focus:outline-none z-50 relative cursor-pointer" 
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
       {/* Hidden Checkbox for State Control */}
@@ -83,14 +102,9 @@ const Navigation = () => {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className="fixed inset-0 bg-beige z-40 transform translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out md:hidden flex flex-col pt-24 px-6 space-y-6 h-screen"
+        className={`fixed inset-0 bg-beige z-40 transform transition-transform duration-500 ease-in-out md:hidden flex flex-col pt-32 px-10 space-y-8 h-screen ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         role="menu"
       >
-        {/* Close Button inside menu */}
-        <label htmlFor="mobile-menu-toggle" className="absolute top-6 right-6 text-navy p-2 cursor-pointer">
-           <X size={24} aria-hidden="true" />
-        </label>
-
         {navLinks.map((link) => {
            const isActive = link.path === '/' 
               ? location === '/' 
@@ -101,7 +115,8 @@ const Navigation = () => {
               key={link.path}
               href={link.path}
               role="menuitem"
-              className={`text-lg font-medium transition-colors ${isActive ? 'text-sunfire' : 'text-umber hover:text-sunfire'}`}
+              onClick={() => setIsMenuOpen(false)}
+              className={`text-2xl font-bold transition-colors ${isActive ? 'text-navy border-l-4 border-sunfire pl-4' : 'text-umber hover:text-navy pl-0'}`}
             >
               {link.name}
             </Link>
@@ -110,10 +125,12 @@ const Navigation = () => {
         
         <a 
           href="mailto:hello@alexchen.dev" 
-          className="text-lg font-medium text-sunfire pt-6 mt-4 border-t border-taupe/60 block"
+          className="text-lg font-medium text-sunfire pt-6 mt-4 border-t border-taupe/60 flex items-center justify-between group"
           role="menuitem"
+          onClick={() => setIsMenuOpen(false)}
         >
-          與我聯繫
+          <span>開始討論您的專案</span>
+          <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
         </a>
       </div>
     </nav>
