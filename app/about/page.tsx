@@ -13,25 +13,27 @@ import {
   Zap,
   ArrowRight,
   FileText,
-  User,
+  LineChart,
   Heart,
   Cpu,
   History,
   Database,
   Layout,
-  Server
+  Server,
+  Search
 } from 'lucide-react';
 
 export const metadata = {
-  title: '關於我 | Alex Chen - 協助釐清思緒的獨立開發者',
-  description: '10年全端開發經驗，專注於將混亂需求轉化為清晰的系統架構。了解我的工作哲學、技術能力與過往經歷。',
+  title: `關於我 | ${PROFILE.name} - ${PROFILE.title}`,
+  description: PROFILE.introShort + ' 了解我的工作哲學、技術能力與專業經歷。',
   openGraph: {
-    title: '關於我 | Alex Chen',
-    description: '協助釐清思緒的獨立開發者。',
+    title: `關於我 | ${PROFILE.name}`,
+    description: PROFILE.introShort,
     url: `${PROFILE.website}/about`,
     type: 'profile',
   },
 };
+
 const About = () => {
   const SKILL_GROUPS = [
     {
@@ -87,16 +89,19 @@ const About = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: PROFILE.name,
-    jobTitle: "Full Stack Developer",
-    url: `${PROFILE.website}/#/about`,
-    sameAs: [PROFILE.social?.facebook, PROFILE.social?.instagram],
-    description: PROFILE.introShort,
-    knowsAbout: ["Web Development", "System Architecture", "Laravel", "React", "Process Optimization"],
+    "name": PROFILE.name,
+    "jobTitle": PROFILE.title,
+    "url": `${PROFILE.website}/about`,
+    "sameAs": [
+      PROFILE.social?.facebook,
+      PROFILE.social?.instagram
+    ],
+    "description": PROFILE.introShort,
+    "knowsAbout": ["網頁全端開發", "系統架構規劃", "Laravel 框架實作", "React/Vue 前端開發", "商務流程優化"]
   };
 
   return (
-    <div className="pt-24 min-h-screen bg-beige">
+    <div className="min-h-screen pt-24 bg-beige">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -104,18 +109,18 @@ const About = () => {
 
       {/* 1. Bio Section */}
       <section className="px-6 mb-24" aria-label="Biography">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        <div className="grid items-center grid-cols-1 gap-12 mx-auto max-w-7xl lg:grid-cols-12 lg:gap-20">
           {/* Left: Image */}
-          <div className="lg:col-span-5 relative lg:sticky lg:top-32 self-start">
+          <div className="relative self-start lg:col-span-5 lg:sticky lg:top-32">
             <FadeIn variant="scale" className="relative p-4">
-              <div className="absolute inset-0 bg-sand/80 rounded-3xl transform -rotate-3 scale-105 z-0 blur-sm" aria-hidden="true" />
+              <div className="absolute inset-0 z-0 transform scale-105 bg-sand/80 rounded-3xl -rotate-3 blur-sm" aria-hidden="true" />
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg z-10">
                 <Image
                   src="/about.jpg"
                   alt={`Portrait of ${PROFILE.name}`}
                   width={800}
                   height={1000}
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
             </FadeIn>
@@ -124,40 +129,59 @@ const About = () => {
           {/* Right: Text */}
           <div className="lg:col-span-7">
             <FadeIn variant="up">
-              <h2 className="text-3xl md:text-5xl font-bold text-charcoal mb-2 leading-tight flex items-center gap-3">
-                <User className="w-8 h-8 text-navy/80 opacity-90" aria-hidden="true" />
-                魚也是貓
-              </h2>
-              <span className="block text-lg font-medium text-charcoal/80 mb-6">協助你釐清思緒的獨立開發者</span>
-              <div className="w-16 h-1 bg-taupe mb-10 rounded-full" aria-hidden="true"></div>
+              <h1 className="mb-4 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl text-charcoal">
+                降低專案風險的獨立開發者
+              </h1>
+              <span className="block mb-12 text-lg font-medium leading-relaxed tracking-wide md:text-xl text-umber/70">
+                在啟動前精準對齊規格，確保技術投入能產出實質商業價值
+              </span>
+
+              <ul className="mb-10 space-y-6" aria-label="核心專業價值">
+                <FadeIn delay={100} variant="fade">
+                  <li className="flex items-center gap-5 group">
+                    <div className="flex items-center justify-center transition-all duration-300 bg-white border shadow-sm w-11 h-11 rounded-xl border-taupe/40 shrink-0 group-hover:border-navy/20">
+                      <Search className="w-5 h-5 text-navy/60" />
+                    </div>
+                    <p className="text-base font-semibold tracking-tight md:text-lg text-umber">
+                      在寫下第一行程式碼前，先把「要做什麼」想清楚
+                    </p>
+                  </li>
+                </FadeIn>
+
+                <FadeIn delay={200} variant="fade">
+                  <li className="flex items-center gap-5 group">
+                    <div className="flex items-center justify-center transition-all duration-300 bg-white border shadow-sm w-11 h-11 rounded-xl border-taupe/40 shrink-0 group-hover:border-navy/20">
+                      <FileText className="w-5 h-5 text-navy/60" />
+                    </div>
+                    <p className="text-base font-semibold tracking-tight md:text-lg text-umber">
+                      將模糊想法轉成可執行、可估算的系統規格
+                    </p>
+                  </li>
+                </FadeIn>
+
+                <FadeIn delay={300} variant="fade">
+                  <li className="flex items-center gap-5 group">
+                    <div className="flex items-center justify-center transition-all duration-300 bg-white border shadow-sm w-11 h-11 rounded-xl border-taupe/40 shrink-0 group-hover:border-navy/20">
+                      <LineChart className="w-5 h-5 text-navy/60" />
+                    </div>
+                    <p className="text-base font-semibold tracking-tight md:text-lg text-umber">
+                      從規劃到實作，確保每一分預算都用在對的地方
+                    </p>
+                  </li>
+                </FadeIn>
+            </ul>
             </FadeIn>
 
-             <div className="space-y-6 text-lg text-umber leading-relaxed mb-8">
-              <FadeIn variant="fade" delay={100}>
-                <p>
-                  專案卡關，往往不是技術無法達成，而是「需求沒有想清楚」。
-                  將 10 年實戰經驗，轉化為對焦商業目標的敏銳度。在寫下第一行程式碼前，先協助收斂邏輯，確保每一分預算都花在刀口上，大幅降低開發風險。
+            <FadeIn variant="fade" delay={400}>
+              <div className="px-5 py-3 mb-12 border-l-2 bg-taupe/10 border-taupe/60 md:px-6 md:py-4 rounded-r-xl">
+                <p className="text-base font-medium leading-relaxed text-umber/90">
+                  專案卡關往往不是技術瓶頸，而是決策邏輯不夠透徹。我提供一套穩定、可預期的落地方案，協助您在充滿變數的過程中，重拾對進度與品質的掌控權。
                 </p>
-              </FadeIn>
-              <FadeIn variant="fade" delay={200}>
-                <p>
-                  合作過程不需要懂程式語言，只需專注於業務目標。
-                  擅長以淺顯易懂的方式溝通，將模糊的想法轉化為具體的執行方案。交付的不只是功能，而是一套邏輯嚴謹、穩定好維護，能真正解決問題的商業系統。
-                </p>
-              </FadeIn>
-              <FadeIn variant="fade" delay={250}>
-                <p className="font-semibold text-charcoal/90 border-l-4 border-taupe pl-6 py-2">
-                  此網站即是最佳實證——從資訊架構梳理、內容策略到全端開發實作，展示我如何協助想快速落地或需要精準規劃的專案順利完成。
-                </p>
-              </FadeIn>
-             </div>
-
-            <FadeIn variant="fade" delay={300}>
-              <div className="w-full h-px bg-gradient-to-r from-taupe/40 to-transparent my-8" aria-hidden="true" />
+              </div>
             </FadeIn>
 
             <FadeIn variant="fade" delay={350}>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <a 
                   href={PROFILE.contactFormLink}
                   target="_blank"
@@ -166,12 +190,12 @@ const About = () => {
                 >
                   <Button variant="primary">
                     <FileText className="w-4 h-4 mr-2" aria-hidden="true" />
-                    立即預約
+                    預約技術諮詢
                   </Button>
                 </a>
                 <Link href="/portfolio" aria-label="View Portfolio">
                   <Button variant="outline">
-                    瀏覽作品
+                    瀏覽技術案例
                     <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" />
                   </Button>
                 </Link>
@@ -182,35 +206,35 @@ const About = () => {
       </section>
 
       {/* 2. Philosophy & Methods Section */}
-      <section className="px-6 mb-24 bg-white py-24 border-y border-taupe/20" aria-label="Philosophy and Workflow">
-        <div className="max-w-7xl mx-auto">
+      <section className="px-6 py-24 mb-24 bg-white border-y border-taupe/20" aria-label="Philosophy and Workflow">
+        <div className="mx-auto max-w-7xl">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             <FadeIn variant="up">
-              <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-2 flex items-center justify-center gap-3">
+              <h2 className="flex items-center justify-center gap-3 mb-2 text-3xl font-bold md:text-4xl text-charcoal">
                 <Heart className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
                 我相信的事 / 我如何工作
               </h2>
-              <span className="block text-lg font-medium text-charcoal/80 mb-6">與我合作，您將獲得的價值</span>
-              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
+              <span className="block mb-6 text-lg font-medium text-charcoal/80">與我合作，您將獲得的價值</span>
+              <div className="w-16 h-1 mx-auto rounded-full bg-taupe" aria-hidden="true"></div>
             </FadeIn>
           </div>
 
           {/* Beliefs Grid */}
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <ul className="grid grid-cols-1 gap-8 mb-8 md:grid-cols-3">
             {BELIEFS.map((item, index) => {
               const Icon = item.icon;
               return (
                 <li key={`belief-${index}`}>
                   <FadeIn className="h-full" delay={index * 100} variant="fade">
-                    <article className="bg-sand p-8 rounded-2xl shadow-sm border border-taupe/60 hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center text-center group">
+                    <article className="flex flex-col items-center h-full p-8 text-center transition-all duration-300 border shadow-sm bg-sand rounded-2xl border-taupe/60 hover:shadow-xl group">
                        <FadeIn variant="scale" delay={index * 100 + 100}>
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 text-navy group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 transition-all duration-300 border border-taupe/20">
+                          <div className="flex items-center justify-center w-12 h-12 mb-4 transition-all duration-300 bg-white border rounded-full text-navy group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 border-taupe/20">
                             <Icon className="w-6 h-6" aria-hidden="true" />
                           </div>
                        </FadeIn>
-                       <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{item.title}</h3>
-                       <p className="text-umber leading-relaxed text-sm">
+                       <h3 className="mb-3 text-xl font-bold transition-colors text-charcoal">{item.title}</h3>
+                       <p className="text-sm leading-relaxed text-umber">
                          {item.desc}
                        </p>
                     </article>
@@ -221,21 +245,21 @@ const About = () => {
           </ul>
           
           {/* Methods Grid */}
-          <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {METHODS.map((item, index) => {
               const Icon = item.icon;
               const delay = 300 + (index * 100);
               return (
                 <li key={`method-${index}`}>
                   <FadeIn className="h-full" delay={delay} variant="fade">
-                    <article className="bg-sand p-8 rounded-2xl shadow-sm border border-taupe/60 hover:shadow-xl transition-all duration-300 h-full flex flex-col items-center text-center group">
+                    <article className="flex flex-col items-center h-full p-8 text-center transition-all duration-300 border shadow-sm bg-sand rounded-2xl border-taupe/60 hover:shadow-xl group">
                        <FadeIn variant="scale" delay={delay + 100}>
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-4 text-navy group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 transition-all duration-300 border border-taupe/20">
+                          <div className="flex items-center justify-center w-12 h-12 mb-4 transition-all duration-300 bg-white border rounded-full text-navy group-hover:bg-sunfire group-hover:text-white group-hover:scale-110 border-taupe/20">
                             <Icon className="w-6 h-6" aria-hidden="true" />
                           </div>
                        </FadeIn>
-                       <h3 className="text-xl font-bold text-charcoal mb-3 transition-colors">{item.title}</h3>
-                       <p className="text-umber leading-relaxed text-sm">
+                       <h3 className="mb-3 text-xl font-bold transition-colors text-charcoal">{item.title}</h3>
+                       <p className="text-sm leading-relaxed text-umber">
                          {item.desc}
                        </p>
                     </article>
@@ -248,30 +272,30 @@ const About = () => {
       </section>
 
       {/* 3. Skills Section */}
-      <section className="px-6 mb-24 relative overflow-hidden py-12" aria-labelledby="skills-heading">
+      <section className="relative px-6 py-12 mb-24 overflow-hidden" aria-labelledby="skills-heading">
         {/* Background Organic Blob */}
         <div className="absolute -bottom-10 -left-10 w-[15%] sm:w-[35%] h-[80%] bg-taupe rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] blur-3xl opacity-60 -rotate-12 pointer-events-none select-none z-0" aria-hidden="true"></div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start relative z-10">
+        <div className="relative z-10 grid items-start grid-cols-1 gap-16 mx-auto max-w-7xl lg:grid-cols-2">
           
           {/* Left: Text Content */}
           <div>
             <FadeIn variant="up">
-              <h2 id="skills-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2 flex items-center gap-3">
+              <h2 id="skills-heading" className="flex items-center gap-3 mb-2 text-3xl font-bold md:text-4xl text-charcoal">
                 <Cpu className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
                 技術能力
               </h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">打造現代化系統的工具箱</span>
-              <div className="w-16 h-1 bg-taupe mb-10 rounded-full" aria-hidden="true"></div>
+              <span className="block mb-6 text-lg font-medium text-charcoal/90">打造現代化系統的工具箱</span>
+              <div className="w-16 h-1 mb-10 rounded-full bg-taupe" aria-hidden="true"></div>
             </FadeIn>
 
-            <dl className="space-y-8 text-umber leading-relaxed">
+            <dl className="space-y-8 leading-relaxed text-umber">
               {/* Backend */}
               <FadeIn variant="fade" delay={100}>
-                <div className="mb-3 flex items-center gap-3">
+                <div className="flex items-center gap-3 mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
                   <Database className="w-4 h-4 text-navy/60" aria-hidden="true" />
-                  <dt className="text-smoke font-bold">後端核心</dt>
+                  <dt className="font-bold text-smoke">後端核心</dt>
                 </div>
                 <dd className="pl-5">
                   <p>
@@ -282,10 +306,10 @@ const About = () => {
 
               {/* Frontend */}
               <FadeIn variant="fade" delay={200}>
-                <div className="mb-3 flex items-center gap-3">
+                <div className="flex items-center gap-3 mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
                   <Layout className="w-4 h-4 text-navy/60" aria-hidden="true" />
-                  <dt className="text-smoke font-bold">前端互動</dt>
+                  <dt className="font-bold text-smoke">前端互動</dt>
                 </div>
                 <dd className="pl-5">
                   <p>
@@ -296,10 +320,10 @@ const About = () => {
 
               {/* Architecture */}
               <FadeIn variant="fade" delay={300}>
-                <div className="mb-3 flex items-center gap-3">
+                <div className="flex items-center gap-3 mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-leaf/70 shadow-sm shrink-0 opacity-60" aria-hidden="true"></span>
                   <Server className="w-4 h-4 text-navy/60" aria-hidden="true" />
-                  <dt className="text-smoke font-bold">DevOps 與工具</dt>
+                  <dt className="font-bold text-smoke">DevOps 與工具</dt>
                 </div>
                 <dd className="pl-5">
                   <p>
@@ -315,14 +339,14 @@ const About = () => {
             {SKILL_GROUPS.map((group, idx) => (
               <FadeIn key={idx} variant="fade" delay={200 + (idx * 100)}>
                 <div>
-                  <h4 className="text-sm font-bold text-navy/70 uppercase tracking-wider mb-2 pl-1">
+                  <h4 className="pl-1 mb-2 text-sm font-bold tracking-wider uppercase text-navy/70">
                     {group.category}
                   </h4>
                   <div className="flex items-center gap-1 mb-5 ml-1" aria-hidden="true">
                     <div className="h-0.5 bg-taupe/60 rounded-full w-8 sm:w-16 transition-all duration-300 group-hover:w-20"></div>
                   </div>
 
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3" aria-label={`Skills in ${group.category}`}>
+                  <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 sm:gap-3" aria-label={`Skills in ${group.category}`}>
                     {group.items.map((skill, i) => (
                       <li key={i} className="bg-white/50 rounded-xl border border-taupe/20 shadow-sm px-4 py-2 text-umber text-center text-sm font-medium hover:scale-[1.02] hover:border-taupe/50 hover:shadow-md transition-all duration-300 cursor-default">
                         {skill}
@@ -341,31 +365,31 @@ const About = () => {
       <section className="px-6 py-16 bg-white border-t border-taupe/20" aria-labelledby="experience-heading">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             <FadeIn variant="up">
-              <h2 id="experience-heading" className="text-3xl md:text-4xl font-bold text-charcoal mb-2 flex items-center justify-center gap-3">
+              <h2 id="experience-heading" className="flex items-center justify-center gap-3 mb-2 text-3xl font-bold md:text-4xl text-charcoal">
                 <History className="w-8 h-8 text-navy opacity-90" aria-hidden="true" />
                 專業經歷
               </h2>
-              <span className="block text-lg font-medium text-charcoal/90 mb-6">持續累積的實戰軌跡</span>
-              <div className="w-16 h-1 bg-taupe mx-auto rounded-full" aria-hidden="true"></div>
+              <span className="block mb-6 text-lg font-medium text-charcoal/90">持續累積的實戰軌跡</span>
+              <div className="w-16 h-1 mx-auto rounded-full bg-taupe" aria-hidden="true"></div>
             </FadeIn>
           </div>
 
           <div className="relative">
             {/* Center Line */}
-            <div className="hidden md:block absolute left-24 md:left-32 top-0 bottom-0 w-px bg-taupe/40" aria-hidden="true"></div>
+            <div className="absolute top-0 bottom-0 hidden w-px md:block left-24 md:left-32 bg-taupe/40" aria-hidden="true"></div>
 
             {/* Desktop View: Timeline */}
-            <ol className="hidden md:block space-y-12 py-4">
+            <ol className="hidden py-4 space-y-12 md:block">
               {EXPERIENCES.map((exp, index) => (
                 <li key={index}>
                   <FadeIn delay={index * 150} variant="fade">
                     <div className="flex items-start group">
                       
                       {/* Left: Year */}
-                      <div className="w-24 md:w-32 flex-shrink-0 text-right pt-2 pr-6 md:pr-8 relative z-10">
-                        <span className="inline-block px-3 py-1 bg-stone-100 rounded-full text-sm font-semibold text-smoke">
+                      <div className="relative z-10 flex-shrink-0 w-24 pt-2 pr-6 text-right md:w-32 md:pr-8">
+                        <span className="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-stone-100 text-smoke">
                           {exp.year.split(' - ')[0]}
                         </span>
                       </div>
@@ -375,10 +399,10 @@ const About = () => {
 
                       {/* Right: Card */}
                       <article className="flex-1 ml-6 md:ml-10">
-                        <div className="bg-beige/50 p-6 rounded-2xl shadow-sm transition-all duration-200 group-hover:shadow-md group-hover:-translate-y-1 cursor-default border border-taupe/30">
-                          <h3 className="font-bold text-charcoal text-lg mb-1">{exp.title}</h3>
-                          <div className="text-sm font-semibold text-navy/60 mb-3">{exp.company}</div>
-                          <p className="text-umber text-sm leading-relaxed line-clamp-2">
+                        <div className="p-6 transition-all duration-200 border shadow-sm cursor-default bg-beige/50 rounded-2xl group-hover:shadow-md group-hover:-translate-y-1 border-taupe/30">
+                          <h3 className="mb-1 text-lg font-bold text-charcoal">{exp.title}</h3>
+                          <div className="mb-3 text-sm font-semibold text-navy/60">{exp.company}</div>
+                          <p className="text-sm leading-relaxed text-umber line-clamp-2">
                             {exp.description}
                           </p>
                         </div>
@@ -391,22 +415,22 @@ const About = () => {
             </ol>
 
             {/* Mobile View: Stacked Card List */}
-            <ol className="md:hidden space-y-6">
+            <ol className="space-y-6 md:hidden">
               {EXPERIENCES.map((exp, index) => (
                 <li key={index}>
                   <FadeIn delay={index * 100} variant="fade">
                     <article className="bg-beige p-6 rounded-2xl shadow-sm border border-taupe/30 hover:shadow-md active:scale-[0.98] transition-all duration-200 cursor-default group">
                       {/* Header: Dot + Year */}
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-leaf shadow-sm group-hover:scale-125 transition-transform duration-300" aria-hidden="true"></div>
+                        <div className="w-2 h-2 transition-transform duration-300 rounded-full shadow-sm bg-leaf group-hover:scale-125" aria-hidden="true"></div>
                         <span className="text-sm font-bold text-smoke bg-beige/50 px-2 py-0.5 rounded-md">
                           {exp.year.split(' - ')[0]}
                         </span>
                       </div>
                       
-                      <h3 className="text-lg font-bold text-charcoal mb-1">{exp.title}</h3>
-                      <div className="text-sm font-semibold text-sunfire mb-3">{exp.company}</div>
-                      <p className="text-umber text-sm leading-relaxed">
+                      <h3 className="mb-1 text-lg font-bold text-charcoal">{exp.title}</h3>
+                      <div className="mb-3 text-sm font-semibold text-sunfire">{exp.company}</div>
+                      <p className="text-sm leading-relaxed text-umber">
                         {exp.description}
                       </p>
                     </article>

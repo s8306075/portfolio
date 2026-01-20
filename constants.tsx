@@ -3,9 +3,9 @@ import { Project, ServiceItem, ExperienceItem, Insight } from '@/types';
 
 export const PROFILE = {
   name: "魚也是貓",
-  title: "全端系統開發者 ＆ 流程優化師",
-  tagline: "將模糊需求收斂為執行藍圖，打造穩健的商業系統",
-  introShort: "你不需懂技術，也能順暢溝通。協助你釐清邏輯、收斂需求，並將想法轉化為穩定好用的數位工具，降低開發風險與溝通成本。",
+  title: "專注降低專案風險的獨立開發者",
+  tagline: "在啟動前精準對齊規格，確保技術投入能產出實質商業價值",
+  introShort: "提供穩定、可預期的落地方案，協助您在充滿變數的開發過程中，重拾對進度與品質的掌控權。",
   contactFormLink: "https://docs.google.com/forms/d/e/1FAIpQLScsgTk6bvI5JeNXTEq8o3oarURW0i8LltcyASTl9a8172mZeQ/viewform?usp=sharing&ouid=117901482318143492061",
   social: {
     facebook: "https://www.facebook.com/xu.xin.yu.81110",
