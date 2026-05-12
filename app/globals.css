@@ -1,35 +1,261 @@
 @import "tailwindcss";
 
 @theme {
-  --color-sunfire: #EA580C;
-  --color-navy: #1E293B;
-  --color-beige: #FDFBF7;
-  --color-sand: #F7F3EC;
-  --color-taupe: #E8E4DC;
-  --color-leaf: #10B981;
-  --color-umber: #57534E;
-  --color-smoke: #44403C;
-  --color-charcoal: #292524;
+  /* [色彩系統] - ATOMIC_SPECS.md */
+  --color-primary-01: #8C949E;
+  --color-primary-01-bright: #9DA6B0;
+  
+  --color-secondary-01: #3D5C47;
+  --color-secondary-01-bright: #4A6E56;
 
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-txt-01: #D0DCE8;
+  --color-txt-02: #A8ADB8;
+  --color-txt-03: #787E8C;
+  --color-txt-04: #6F7A85;
+  --color-txt-05: #8C949E;
 
-  --animate-fadeIn: fadeIn 0.2s ease-out forwards;
-  --animate-float: float 4s ease-in-out infinite;
-  --animate-floatDelayed: float 4s ease-in-out 2s infinite;
+  --color-bg-01: #0A0C0F;
+  --color-bg-02: #13171C;
+  --color-bg-03: #1A1F26;
 
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(-10px); }
-    100% { opacity: 1; transform: translateY(0); }
+  --color-line-01: #1F252C;
+  --color-line-02: #E8702A;
+
+  --color-accent-01: #E06A26;
+  --color-accent-02: #DCE6F0;
+
+  --color-state-01: #5ECEA0;
+  --color-state-02: #E8C55F;
+  --color-state-03: #ED5E5E;
+  --color-state-04: #6EA2D4;
+
+  /* [字體系統] */
+  --font-serif: var(--font-noto-serif), serif;
+  --font-sans: var(--font-noto-sans), sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+  --font-editorial: var(--font-editorial), serif;
+
+  /* [動能時間曲線] */
+  --ease-mo-01-in: cubic-bezier(0.15, 1, 0.3, 1.1);
+  --ease-mo-02: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-mo-03: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-mo-04-out: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-mo-05-settle: cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --global-light-direction: 150deg;
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+  html, body {
+    background-color: var(--color-bg-01);
+    color: var(--color-txt-03);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+  }
+
+  /* 標題與展示層級 */
+  .display {
+    @apply font-serif font-medium tracking-tight leading-[1.1] text-txt-01;
+    font-size: clamp(64px, 10vw, 80px);
+  }
+  h1 { @apply font-serif text-[48px] md:text-[56px] leading-[1.2] text-txt-01; }
+  h2 { @apply font-serif text-[32px] md:text-[40px] leading-[1.3] text-txt-01; }
+  h3 { @apply font-serif text-[22px] md:text-[26px] font-medium leading-[1.4] text-txt-01; }
+  
+  p { @apply font-sans text-[16px] md:text-[17px] font-light leading-[1.8] text-txt-03; }
+  .caption { @apply font-mono text-[13px] leading-[1.6] text-txt-04; }
+
+  /* 容器區隔策略 (CS-01 至 CS-05) */
+  .cs-01-void {
+    @apply pt-[80px] pb-[180px] px-[20px] md:px-[80px];
+    background-color: var(--color-bg-01);
+  }
+
+  .cs-02-section-cut {
+    @apply relative border-t border-line-01 py-[40px] bg-bg-01;
+  }
+
+  .cs-03-depth-fault {
+    @apply relative overflow-hidden bg-bg-02;
+  }
+
+  .cs-04-angled-shear {
+    @apply relative overflow-hidden;
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 calc(100% - 40px));
+  }
+
+  .cs-05-dissolution {
+    @apply relative overflow-hidden min-h-[120px];
+    mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
   }
 }
 
-body {
-  background-color: var(--color-bgMain);
-  color: var(--color-umber);
+@layer utilities {
+  /* ==========================================================================
+     [Mat] 物質材質協議 (5 種)
+     ========================================================================== */
+
+  /* [Mat-01] 手工拋光白金 (Hand-Polished Rhodium) */
+  .mat-01-rhodium {
+    position: relative;
+    background: linear-gradient(135deg, var(--color-bg-02) 0%, var(--color-bg-01) 100%);
+  }
+  .mat-01-rhodium::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-soft-light;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, #9DA6B0 3px, #9DA6B0 4px);
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  /* [Mat-02] 雲母磨砂層 (Ultra-fine Mica Frosted Surface) */
+  .mat-02-mica {
+    @apply backdrop-blur-[12px] saturate-[150%] bg-bg-01/90 shadow-[inset_0_0_0_0.5px_rgba(255,255,255,0.08)];
+    transition: opacity 300ms var(--ease-mo-03);
+  }
+
+  /* [Mat-03] 深邃曜石鏡面 (Obsidian Mirror Finish) */
+  .mat-03-obsidian {
+    @apply bg-bg-01 relative;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+  }
+  .mat-03-obsidian::before {
+    content: "";
+    @apply absolute inset-0 pointer-events-none opacity-[0.02];
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 70%);
+  }
+
+  /* [Mat-04] 航太級碳素陶瓷 (Cera-Carbon Hybrid) */
+  .mat-04-ceramic {
+    @apply bg-bg-02 border border-white/5 relative overflow-hidden;
+  }
+  .mat-04-ceramic::after {
+    content: "";
+    @apply absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay;
+    background-image: repeating-linear-gradient(45deg, #000 0px, #000 1px, transparent 1px, transparent 2px);
+  }
+
+  /* [Mat-05] 噪點消光鍛面 */
+  .mat-05-satin {
+    position: relative;
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.02), transparent 50%),
+      url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAQMAAAD58VeFAAAABlBMVEUAAAD///+l2Z/dAAACXUlEQVQoz2WQS3IDMQhE9f8v7pInXyYpAnS96pZkkvDx9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX+D8R+WvF/LwAAAAAElFTkSuQmCC");
+    background-size: auto, 128px 128px;
+    opacity: 0.05;
+  }
+
+  /* ==========================================================================
+     [Opt] 光學協議 (5 種)
+     ========================================================================== */
+
+  /* [Opt-01] 弧光色散穿透 */
+  .opt-01-arc {
+    @apply isolate;
+    background: radial-gradient(ellipse 60% 40% at center, #FFFFFF 10%, #E8702A 60%, transparent 100%);
+    mix-blend-mode: screen;
+    filter: brightness(2) contrast(1.5);
+  }
+
+  /* [Opt-02] 熔接感應 */
+  .opt-02-weld {
+    box-shadow: 
+      0 0 8px #FFFFFF,
+      0 0 20px rgba(232, 112, 42, 0.4);
+  }
+
+  /* [Opt-03] 精密格柵呼吸 */
+  .opt-03-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+
+  /* [Opt-04] 重力折射暈 */
+  .opt-04-grav {
+    @apply shadow-[0_20px_60px_-20px_rgba(0,0,0,0.8),_0_0_24px_rgba(140,148,158,0.1)];
+  }
+
+  /* [Opt-05] 掠射方向冷光 */
+  .opt-05-grazing {
+    box-shadow: 
+      inset 1px 1px 0 0 rgba(220, 230, 240, 0.12),
+      -1px -1px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  /* ==========================================================================
+     [Int] 交互協議 (5 種)
+     ========================================================================== */
+     
+  .int-01-weld:hover {
+    @apply border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.2)];
+  }
+
+  .int-02-spring:active {
+    scale: 0.96;
+    transition: scale 60ms ease-in;
+  }
+
+  .int-03-focus:focus-visible {
+    @apply outline-none ring-2 ring-white/60 ring-offset-4 ring-offset-bg-01;
+  }
+
+  .int-04-float:hover {
+    @apply -translate-y-1 backdrop-blur-[14px];
+    transition: transform 350ms var(--ease-mo-03);
+  }
+
+  /* [Opt-06] 弧光色散脈衝 (Arc Chromatic Pulse) */
+  .opt-06-pulse {
+    @apply absolute inset-0 pointer-events-none;
+    background: radial-gradient(circle at center, rgba(232, 112, 42, 0.2) 0%, transparent 70%);
+    animation: arc-pulse-glow 0.6s var(--ease-mo-03) forwards;
+  }
+}
+
+@keyframes arc-pulse-glow {
+  0% { opacity: 0; transform: scale(0.8); blur: 0px; }
+  20% { opacity: 1; transform: scale(1); blur: 10px; }
+  100% { opacity: 0; transform: scale(1.5); blur: 40px; }
+}
+
+@keyframes scan-load {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes flash-arc {
+  0%, 100% { opacity: 0.1; brightness: 1; }
+  2% { opacity: 1; brightness: 4; transform: translate(1px, -1px); }
+  5% { opacity: 0.4; brightness: 1.5; transform: translate(0, 0); }
+}
+
+/* ==========================================================================
+   [An] 動效協議 (5 種) - 定義於全域供組件調用
+   ========================================================================== */
+.an-01-breath {
+  animation: field-breath 8s infinite ease-in-out;
+}
+@keyframes field-breath {
+  0%, 100% { opacity: 0.03; filter: contrast(1); }
+  50% { opacity: 0.1; filter: contrast(1.12); }
+}
+
+.an-03-scan {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
+  animation: scan-vertical 6s infinite linear;
+}
+@keyframes scan-vertical {
+  from { top: -10%; }
+  to { top: 110%; }
 }
