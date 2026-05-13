@@ -1,5 +1,5 @@
 export const SITE_CONFIG = {
-  url: process.env.NEXT_PUBLIC_BASE_URL || 'https://fishcat.tech',
+  url: process.env.NEXT_PUBLIC_BASE_URL || 'https://portfolio-mocha-beta-81.vercel.app/',
   name: '魚也是貓',
   title: '魚也是貓 | 專業系統整合顧問 · 自動化流程與 CRM 軟體專家',
   description: '專業解決 Excel 數據混亂、建立 CRM 車輛派遣系統與行政流程自動化。協助個人創作者與企業縮減 90% 重複工時，把模糊的想法變成高效運行的系統實體。',
@@ -17,8 +17,8 @@ export const SITE_CONFIG = {
   ],
   ogImage: '/og-image.jpg',
   social: {
-    instagram: 'https://www.instagram.com/',
-    threads: 'https://www.threads.net/',
-    facebook: 'https://www.facebook.com/'
+    threads: 'https://www.threads.com/@a121403287009',
+    facebook: "https://www.facebook.com/xu.xin.yu.81110",
+    instagram: "https://www.instagram.com/a121403287009/"
   }
 };
