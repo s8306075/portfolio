@@ -1,5 +1,5 @@
 export const SITE_CONFIG = {
-  url: process.env.NEXT_PUBLIC_BASE_URL || 'https://portfolio-mocha-beta-81.vercel.app',
+  url: process.env.NEXT_PUBLIC_BASE_URL || 'https://portfolio-mocha-beta-81.vercel.app/',
   name: '魚也是貓',
   siteName: '魚也是貓',
   title: '魚也是貓 | 專業系統整合顧問 · 自動化流程與 CRM 軟體專家',
