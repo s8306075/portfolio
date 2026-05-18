@@ -1,33 +1,33 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const WORKFLOW_STEPS = [
   {
     sequence: "01",
-    title: "聽懂你的需求",
-    description: "我們不急著談技術。聽懂你的痛點與目標，確保後續的開發都投入在正確的地方。",
-    tag: "需求分析" 
+    title: "聊聊想法，定出要做的事",
+    description: "把你想做的、想解決的問題告訴我，我負責整理出一份大綱、時程與費用估算。這一步我們不對技術細節，只抓核心骨架，先把方向走對。",
+    tag: "需求大綱" 
   },
   {
     sequence: "02",
-    title: "看見雛形",
-    description: "快速看到雛形網站。我們透過分析需求轉化的網站，讓你迅速就能看到且實際操作並給予反饋，確保成品就是你要的。",
-    tag: "開發迭代"
+    title: "簽約付定，把規格講明白",
+    description: "雙方確認功能大綱與報價後，簽署正式合約並支付訂金。合約生效後，我會與你展開深度討論，將大綱細化為一份功能清單。明確的驗收日期、每個操作背後的運作邏輯，都在動工前白紙黑字寫明白，絕不留灰色地帶。",
+    tag: "簽約細化"
   },
   {
     sequence: "03",
-    title: "透明化的推進步調",
-    description: "用簡單的方式匯報進度。我們不追求一步到位，但追求每一步都實現。",
-    tag: "方案規劃"
+    title: "依序推進，分階段點收成果",
+    description: "開發期間依照定好的時程表推進，且定期跟你同步最新狀況。無論案件規模大小，我們都依據動工前講好的階段來展示並點收成果，讓開發進度完全透明。",
+    tag: "進度推進"
   },
   {
     sequence: "04",
-    title: "彈性又穩定的交付",
-    description: "過程彈性不僵化，隨時微調且回饋。確保交到你手中的系統與你的需求對齊",
-    tag: "交付上線"
+    title: "規格清點，乾淨結案",
+    description: "完工後進入測試期間，在約定的驗收期內，若合約規格內發現的 Bug 我負責修到好。當系統運作無誤、付清尾款後，我會移交所有程式碼。本次合作清爽結案，清清楚楚，保障你我的時間與資產。",
+    tag: "結案點收"
   }
 ];
 
@@ -50,22 +50,17 @@ export function Workflow() {
   return (
     <section 
       ref={containerRef} 
-      className="relative cs-01-void !py-[120px] lg:!py-[240px] overflow-hidden bg-bg-01" 
+      className="relative cs-02-section-cut-rev !py-[120px] lg:!py-[240px] overflow-hidden" 
+      style={{ background: 'radial-gradient(circle at 50% -20%, #1A2635 0%, #0A0C0F 60%)' }}
       id="workflow"
     >
-      {/* 頂部銜接：能量滲透 (Energy Seepage) - 背景光壓差 */}
-      <div className="absolute inset-x-0 top-0 h-[100px] bg-gradient-to-b from-bg-02 to-bg-01 z-10" />
-
-      {/* [SEC-04] 幾何折線從上一區塊延伸 */}
-      <div className="absolute left-[50%] top-0 h-[120px] w-[1px] bg-white/10 z-[5] lg:left-[calc(50%+190px)]" />
-
       {/* 基礎層級：底層網格 */}
       <div className="absolute inset-0 z-0 opacity-[0.03] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]">
         <div className="absolute inset-0 opt-03-grid" />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-24 lg:gap-40">
+      <div className="container relative z-10 w-full px-4 mx-auto lg:px-12">
+        <div className="flex flex-col gap-24 lg:flex-row lg:gap-40">
           
           {/* 左側：戰略價值中心 */}
           <div className="lg:w-[30%]">
@@ -83,13 +78,13 @@ export function Workflow() {
                   </span>
                 </div>
                 
-                <h2 className="font-serif text-txt-01 text-[52px] md:text-[68px] leading-[0.85] font-normal mb-12 tracking-tighter">
+                <h2 className="font-serif text-txt-01 text-[42px] md:text-[52px] lg:text-[68px] leading-[0.85] font-normal mb-8 lg:mb-12 tracking-tighter break-all">
                   我是如何幫你把<br />
-                  <span className="text-state-04 select-none drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">混亂釐清？</span>
+                  <span className="text-state-04 select-none drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]">混亂釐清？</span>
                 </h2>
                 
                 <div className="space-y-12">
-                  <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-12">
+                  <div className="grid grid-cols-2 gap-8 pt-12 border-t border-white/10">
                             <div className="space-y-3">
                               <div className="font-mono text-txt-03 text-[13px] tracking-[0.15em] uppercase font-bold">這對你意味著什麼？</div>
                               <div className="text-txt-02 text-[15px] leading-relaxed font-semibold">更低的溝通成本，<br />更高的交付品質。</div>
@@ -109,7 +104,7 @@ export function Workflow() {
                   </div>
         
                   {/* 右側：動態能量軌道 */}
-                  <div className="flex-1 relative">
+                  <div className="relative flex-1">
                     
                     {/* 底層靜態軌道 */}
                     <div className="absolute left-[12px] top-0 bottom-0 w-[1px] bg-white/[0.03] z-0" />
@@ -121,7 +116,7 @@ export function Workflow() {
                     />
         
           {/* 傳遞 scroll 進度供子組件計算物理連動 */}
-          <div className="flex flex-col gap-12 lg:gap-16 py-8 relative z-20">
+          <div className="relative z-20 flex flex-col gap-12 py-8 lg:gap-16">
             {WORKFLOW_STEPS.map((step, index) => (
               <WorkflowStep 
                 key={step.sequence} 
@@ -138,7 +133,7 @@ export function Workflow() {
           </div>
       
       {/* 底部邊界平滑 */}
-      <div className="absolute bottom-0 left-0 right-0 h-[400px] bg-gradient-to-t from-bg-01 to-transparent pointer-events-none z-[5]" />
+      <div className="absolute bottom-0 left-0 right-0 h-[400px] pointer-events-none z-[5]" />
     </section>
   );
 }
@@ -150,10 +145,9 @@ function WorkflowStep({
 }: { 
   data: typeof WORKFLOW_STEPS[0], 
   index: number,
-  progress: any
+  progress: MotionValue<number>
 }) {
   const stepRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(stepRef, { once: false, margin: "-30% 0px -30% 0px" });
   const [isHovered, setIsHovered] = useState(false);
 
   // [鈦金諧振] 點擊/觸發狀態
@@ -177,7 +171,7 @@ function WorkflowStep({
   return (
     <div 
       ref={stepRef}
-      className="relative pl-12 lg:pl-28 group mb-8 last:mb-0"
+      className="relative pl-12 mb-8 lg:pl-28 group last:mb-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseDown={() => setIsTapped(true)}
@@ -195,13 +189,13 @@ function WorkflowStep({
                boxShadow: isSparked ? "0 0 20px theme(colors.primary-01-bright)" : "none"
              }}
              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-             className="w-2 h-2 absolute z-10"
+             className="absolute z-10 w-2 h-2"
           />
 
           {/* [鈦金諧振] 回彈震盪效果 */}
           <motion.div
             animate={isTapped ? { scale: 0.8 } : { scale: 1 }}
-            className="absolute inset-0 border border-white/10 rotate-45"
+            className="absolute inset-0 rotate-45 border border-white/10"
           />
         </div>
       </div>
@@ -282,6 +276,3 @@ function WorkflowStep({
     </div>
   );
 }
-
-
-

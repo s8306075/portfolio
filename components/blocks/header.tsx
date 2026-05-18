@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
   { name: "專業服務", href: "#services", code: "01" },
   { name: "合作流程", href: "#workflow", code: "02" },
-  { name: "案例展示", href: "#cases", code: "03" },
-  // { name: "診斷", href: "#anchor", code: "04" },
+  { name: "案例展示", href: "#cases", code: "03" }
 ];
 
 export function Header() {
@@ -19,14 +18,6 @@ export function Header() {
   const { scrollY } = useScroll();
 
   useEffect(() => {
-    // 確保偽單頁架構下的初始座標純淨：進入頁面強制回歸頂部且清空 Hash
-    if (typeof window !== 'undefined') {
-      window.scrollTo(0, 0);
-      if (window.location.hash) {
-        window.history.replaceState(null, '', window.location.pathname);
-      }
-    }
-
     const unsub = scrollY.on("change", (latest) => {
       setIsScrolled(latest > 50);
     });
@@ -39,7 +30,7 @@ export function Header() {
       className={cn(
         "fixed top-0 left-0 right-0 z-[150] h-20 flex items-center transition-all duration-700",
         isScrolled 
-          ? "bg-bg-02 border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]" 
+          ? "bg-bg-02/95 backdrop-blur-md border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.8)]" 
           : "bg-transparent"
       )}
     >
@@ -55,15 +46,19 @@ export function Header() {
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 h-full flex items-center justify-between relative">
-        {/* 背景微觀質地 */}
+      <div className="container relative flex items-center justify-between h-full px-6 mx-auto lg:px-12">
+        {/* 背景微觀質地：冷核聚變 (Nuclear Vibration) */}
         {isScrolled && (
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+          <motion.div 
+            animate={{ opacity: [0.03, 0.05, 0.03] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 pointer-events-none" 
+          />
         )}
         <Logo />
 
         {/* 桌面端選單 */}
-        <nav className="hidden lg:flex items-center gap-12">
+        <nav className="items-center hidden gap-12 lg:flex">
           <div className="flex items-center gap-10">
             {NAV_ITEMS.map((item) => (
               <NavItem key={item.name} item={item} />
@@ -83,8 +78,9 @@ export function Header() {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                   else window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
                 }}
+                icon={<ArrowRight className="w-3.5 h-3.5" />}
              >
-                啟動診斷
+                開始諮詢
              </Button>
           </div>
         </nav>
@@ -151,47 +147,80 @@ function Logo() {
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       onClick={handleLogoClick}
-      className="flex items-center gap-5 cursor-pointer group relative"
+      className="relative flex items-center gap-5 cursor-pointer group"
     >
-      <div className="relative w-4 h-6">
-        <motion.div 
-          animate={{ 
-            y: isHovered ? -2 : 0, 
-            backgroundColor: isHovered ? "var(--color-primary-01-bright)" : "var(--color-primary-01)" 
-          }}
-          transition={{ ease: [0.34, 1.56, 0.64, 1], duration: 0.4 }}
-          className="absolute top-0 left-0 w-[1px] h-[24px]"
-        />
-        <motion.div 
-          animate={{ 
-            y: isHovered ? -15 : 0, 
-            backgroundColor: isHovered ? "var(--color-primary-01-bright)" : "var(--color-primary-01)"
-          }}
-          style={{ top: "13px", left: "6px" }}
-          transition={{ ease: [0.34, 1.56, 0.64, 1], duration: 0.4 }}
-          className="absolute w-[1px] h-[12px]"
-        />
-        <motion.div 
-          animate={{ 
-            y: isHovered ? -11 : 0, 
-            backgroundColor: isHovered ? "var(--color-primary-01-bright)" : "var(--color-primary-01)",
-            opacity: isHovered ? [1, 0.2, 1] : 1
-          }}
-          style={{ top: "9px", left: "6.5px" }}
-          transition={{
-            y: { ease: [0.34, 1.56, 0.64, 1], duration: 0.4 },
-            opacity: isHovered ? { duration: 0.8, repeat: Infinity } : { duration: 0.2 }
-          }}
-          className="absolute w-[2px] h-[2px] rotate-0"
-        />
+      <div className="relative flex items-center gap-4">
+        {/* 精確定義：品牌主文字（銠金屬質地模擬） */}
+        <span className="relative font-sans font-black text-[18px] lg:text-[20px] tracking-[0.2em] leading-none uppercase overflow-hidden">
+          <span className="transition-colors duration-500 text-txt-01 group-hover:text-white">
+            魚也是貓
+          </span>
+          {/* 金屬反光位移：靜止時極細微，Hover 時掃過一次 */}
+          <motion.div 
+            animate={{ 
+              x: isHovered ? ["-100%", "200%"] : "-100%" 
+            }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0 -skew-x-12 pointer-events-none bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          />
+        </span>
+
+        {/* 機械節點：精密旋轉鑽石 (碳素陶瓷質感) */}
+        <div className="relative flex items-center justify-center w-4 h-4">
+            {/* 外框：結構應力追蹤 (Structural Stress Tracking) */}
+            <svg className="absolute inset-0 w-full h-full -rotate-45" viewBox="0 0 16 16">
+              <motion.rect
+                x="1" y="1" width="14" height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                className="text-primary-01/30"
+                animate={{ 
+                  rotate: isHovered ? 90 : 0,
+                }}
+                transition={{ type: "spring", damping: 20, stiffness: 100 }}
+              />
+              {/* 單向慢速位移亮點 */}
+              <motion.rect
+                x="1" y="1" width="14" height="14"
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="1"
+                strokeDasharray="4 12"
+                animate={{ 
+                  strokeDashoffset: [0, -16]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  ease: "linear", 
+                  repeat: Infinity 
+                }}
+                className="opacity-40"
+              />
+            </svg>
+            
+            {/* 核心點：鈦金諧振 (Harmonic Titanium Resonance) */}
+            <motion.div 
+                animate={{ 
+                    rotate: isHovered ? -45 : 45,
+                    scale: isHovered ? [1, 1.3, 1.2] : 1,
+                    backgroundColor: isHovered ? "var(--color-primary-01-bright)" : "var(--color-primary-01)"
+                }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="w-[3px] h-[3px] bg-primary-01 z-10"
+            />
+        </div>
       </div>
 
-      <div className="flex items-center relative gap-3">
-        <span className="font-sans font-black text-[18px] text-txt-01 tracking-widest leading-none">
-          魚也是貓
-        </span>
-        <div className="w-[3px] h-[3px] bg-txt-01 rotate-45" />
-      </div>
+      {/* 結構應力線 (物理性邊緣亮點) */}
+      <motion.div 
+        animate={{ 
+            scaleX: isHovered ? 1 : 0,
+            opacity: isHovered ? 0.8 : 0
+        }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute -bottom-1 left-0 right-0 h-[0.5px] bg-primary-01 origin-left"
+      />
     </motion.div>
   );
 }
@@ -224,10 +253,32 @@ function NavItem({ item }: { item: { name: string; href: string; code: string } 
       onClick={handleClick}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative text-txt-01 font-sans font-medium text-[15px] tracking-widest flex items-center group/item px-2"
+      className="relative flex items-center px-3 py-1 cursor-pointer group/nav-item"
     >
-      <span className={cn("relative z-10 transition-all duration-300", isHovered ? "text-txt-01" : "opacity-60")}>
+      {/* 序列編號：提升靜態對比度，加強引導作用 */}
+      <span className={cn(
+        "font-mono text-[10px] mr-2 transition-all duration-500",
+        isHovered ? "text-primary-01" : "text-primary-01/80"
+      )}>
+        {item.code}
+      </span>
+
+      {/* 主文字：優化靜態可讀性，移除過度弱化 */}
+      <span className={cn(
+        "relative z-10 font-sans font-medium text-[14px] lg:text-[15px] tracking-[0.2em] transition-all duration-500",
+        isHovered ? "text-white translate-y-[-1px]" : "text-txt-01"
+      )}>
         {item.name}
+        
+        {/* 高剛性切入線 (利刃鎖定) */}
+        <motion.div 
+          animate={{ 
+            scaleX: isHovered ? 1 : 0,
+            opacity: isHovered ? 1 : 0 
+          }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="absolute -bottom-1 inset-x-0 h-[0.5px] bg-primary-01 origin-left"
+        />
       </span>
     </motion.a>
   );
@@ -274,14 +325,14 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none mat-05-satin" />
         <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         
-        <div className="flex-1 flex flex-col p-8 pt-20 relative z-10">
+        <div className="relative z-10 flex flex-col flex-1 p-8 pt-20">
           <div className="flex flex-col gap-0.5 relative z-10 mb-8">
             {NAV_ITEMS.map((item, idx) => (
               <MobileNavItem key={item.name} item={item} index={idx} onClose={onClose} />
             ))}
           </div>
 
-          <div className="mt-auto pb-10">
+          <div className="pb-10 mt-auto">
             <div className="mb-6 h-[1px] bg-primary-01/10 w-full" />
             <MobileCTA />
           </div>
@@ -293,7 +344,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   );
 }
 
-function MobileNavItem({ item, index, onClose }: { item: any; index: number; onClose: () => void }) {
+function MobileNavItem({ item, index, onClose }: { item: { name: string; href: string; code: string }; index: number; onClose: () => void }) {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
@@ -324,11 +375,11 @@ function MobileNavItem({ item, index, onClose }: { item: any; index: number; onC
       initial={{ x: 10, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: index * 0.05, duration: 0.4, ease: "easeOut" }}
-      className="group relative flex items-center justify-between py-4 border-b border-white/5 active:bg-white/5 px-4 transition-colors"
+      className="relative flex items-center justify-between px-4 py-5 transition-colors border-b group border-white/5 active:bg-white/5"
     >
-      <div className="flex items-center gap-6">
-        <span className="font-mono text-[9px] text-txt-04 tracking-tighter mt-1">{item.code}</span>
-        <span className="text-txt-02 font-sans font-black text-[15px] tracking-[0.3em] transition-colors duration-400 group-hover:text-txt-01 group-active:text-txt-01">
+      <div className="flex items-center gap-8">
+        <span className="font-mono text-[10px] text-txt-04 tracking-tighter mt-1">{item.code}</span>
+        <span className="text-txt-01 font-sans font-black text-[18px] tracking-[0.3em] transition-colors duration-400 group-active:text-secondary-01">
           {item.name}
         </span>
       </div>
@@ -338,13 +389,18 @@ function MobileNavItem({ item, index, onClose }: { item: any; index: number; onC
 
 function MobileCTA() {
   return (
-    <div className="relative group w-full flex justify-center px-4">
+    <div className="relative flex justify-center w-full px-4 group">
       <Button 
         variant="primary" 
         size="large"
         className="w-full tracking-[0.2em] text-[15px] font-black"
+        onClick={() => {
+          const el = document.getElementById('footer-cta');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          else window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }}
       >
-        啟動諮詢
+        開始諮詢
       </Button>
     </div>
   );

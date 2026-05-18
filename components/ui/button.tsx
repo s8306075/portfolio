@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -28,19 +28,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       // Primary 變體
       if (variant === "primary") {
         const base = {
-          bg: "#E8702A", // Accent-01
+          bg: "#68C4D1", // Secondary-01
+          hoverBg: "#7BD1DD", // 僅提升約 8% 亮度
           textColor: "#0A0C0F", // Bg-01
-          borderRadius: "2px 8px 2px 8px", // 非對稱切角: tl&br 2px, tr&bl 8px
+          clipPath: "polygon(2px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 8px 100%, 0 calc(100% - 8px), 0 2px)",
+          borderRadius: undefined,
           border: "none",
-          shadow: "rgba(232, 112, 42, 0.20)",
+          shadow: "rgba(104, 196, 209, 0.20)",
           font: "font-sans" as string,
         };
         if (size === "large") {
-          return { ...base, padding: "14px 32px", minWidth: "200px", height: "52px", fontSize: "14px", iconSize: "16px", gap: "8px", shadowBlur: "12px", shadowAlpha: 0.3 };
+          return { ...base, padding: "14px 40px", minWidth: "220px", height: "56px", fontSize: "16px", iconSize: "20px", gap: "12px", shadowBlur: "16px", shadowAlpha: 0.35 };
         } else if (size === "medium") {
-          return { ...base, padding: "10px 24px", minWidth: "auto", height: "40px", fontSize: "14px", iconSize: "14px", gap: "6px", shadowBlur: "8px", shadowAlpha: 0.25 };
+          return { ...base, padding: "10px 24px", minWidth: "auto", height: "42px", fontSize: "14px", iconSize: "16px", gap: "8px", shadowBlur: "8px", shadowAlpha: 0.25 };
         } else {
-          return { ...base, padding: "6px 16px", minWidth: "auto", height: "32px", fontSize: "12px", iconSize: "12px", gap: "4px", shadowBlur: "6px", shadowAlpha: 0.2, font: "font-mono" };
+          return { ...base, padding: "6px 16px", minWidth: "auto", height: "34px", fontSize: "12px", iconSize: "14px", gap: "6px", shadowBlur: "6px", shadowAlpha: 0.2, font: "font-mono" };
         }
       } 
       // Secondary 變體
@@ -48,18 +50,20 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const base = {
           bg: "transparent",
           textColor: "#E8EBF0", // Txt-01
-          borderRadius: "4px", // 幾何穩定性優先
-          border: "1px solid #1F252C",
+          clipPath: "polygon(4px 0, 100% 0, 100% calc(100% - 4px), calc(100% - 4px) 100%, 0 100%, 0 4px)", // 4px symmetric cut
+          borderRadius: undefined,
+          border: "1px solid rgba(255, 255, 255, 0.12)", // 強化邊緣可讀性
+          hoverBorder: "1px solid rgba(255, 255, 255, 0.3)", // Hover 時亮度補償
           font: "font-sans" as string,
           shadowAlpha: 0,
           shadowBlur: "0px",
         };
         if (size === "large") {
-          return { ...base, padding: "14px 32px", minWidth: "200px", height: "52px", fontSize: "14px", iconSize: "16px", gap: "8px" };
+          return { ...base, padding: "14px 40px", minWidth: "220px", height: "56px", fontSize: "16px", iconSize: "20px", gap: "12px" };
         } else if (size === "medium") {
-          return { ...base, padding: "10px 24px", minWidth: "auto", height: "40px", fontSize: "14px", iconSize: "14px", gap: "6px" };
+          return { ...base, padding: "10px 24px", minWidth: "auto", height: "42px", fontSize: "14px", iconSize: "16px", gap: "8px" };
         } else {
-          return { ...base, padding: "6px 16px", minWidth: "auto", height: "32px", fontSize: "12px", iconSize: "12px", gap: "4px", textColor: "#A8ADB8", font: "font-mono" };
+          return { ...base, padding: "6px 16px", minWidth: "auto", height: "34px", fontSize: "12px", iconSize: "14px", gap: "6px", textColor: "#A8ADB8", font: "font-mono" };
         }
       } 
       // Ghost 變體
@@ -67,6 +71,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         const base = {
           bg: "transparent",
           textColor: "#787E8C", // Txt-03
+          clipPath: "none",
           borderRadius: "0",
           border: "none",
           font: (size === "small" ? "font-mono" : "font-sans") as string,
@@ -83,11 +88,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       }
     }, [variant, size]);
 
-    // 動能曲線定義
-    const springTransition: any = {
+    // 動能曲線定義：高剛性切入 (High-Rigidity Snap-in)
+    const springTransition: unknown = {
       type: "spring",
-      stiffness: 300,
-      damping: 20,
+      stiffness: 500, 
+      damping: 30,
       mass: 0.8,
     };
 
@@ -98,15 +103,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       if (props.onClick) props.onClick(e);
     };
 
-    // 分離 motion props 與原生 button props
-    const { 
-      whileHover, 
-      whileTap, 
-      animate: animateProp, 
-      initial: initialProp, 
-      transition: transitionProp,
-      ...nativeProps 
-    } = props as any;
+    // 直接使用 props，motion.button 會處理相關屬性
+    const nativeProps = props as Record<string, unknown>;
 
     return (
       <motion.button
@@ -124,16 +122,18 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           padding: spec.padding,
           minWidth: spec.minWidth,
           height: spec.height,
-          borderRadius: spec.borderRadius,
-          backgroundColor: spec.bg,
-          border: spec.border,
-          boxShadow: variant === "primary" ? `0 0 0 1.5px rgba(232, 112, 42, 0.2), 0 0 ${spec.shadowBlur} rgba(232, 112, 42, ${spec.shadowAlpha})` : "none",
+          borderRadius: spec.borderRadius || "0",
+          clipPath: spec.clipPath,
+          backgroundColor: isHovered && (spec as { hoverBg?: string }).hoverBg ? (spec as { hoverBg?: string }).hoverBg : spec.bg,
+          border: isHovered && (spec as { hoverBorder?: string }).hoverBorder ? (spec as { hoverBorder?: string }).hoverBorder : spec.border,
+          filter: variant === "primary" ? `drop-shadow(0 0 ${spec.shadowBlur} rgba(104, 196, 209, ${spec.shadowAlpha}))` : "none",
+          transition: "border-color 0.2s ease-out, background-color 0.2s ease-out",
         }}
         animate={{
           scale: isClicked ? (size === "small" ? 0.85 : 0.96) : 1,
           y: isClicked ? (variant === "ghost" ? 0 : 1) : (isHovered && variant === "secondary" ? -4 : isHovered && variant === "ghost" ? -2 : 0),
         }}
-        transition={springTransition}
+        transition={springTransition as Record<string, unknown>}
         {...nativeProps}
       >
         {/* ---- 層級 0: 物質材質 (Materials) ---- */}
@@ -236,11 +236,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ) : (
             <>
               {icon && (
-                <span style={{ width: spec.iconSize, height: spec.iconSize }} className="flex-shrink-0">
-                  {icon}
+                <span 
+                  style={{ width: spec.iconSize, height: spec.iconSize }} 
+                  className="flex items-center justify-center flex-shrink-0"
+                >
+                  {React.isValidElement(icon) ? React.cloneElement(icon as React.ReactElement<{ size: string }>, { size: spec.iconSize }) : icon}
                 </span>
               )}
-              <span style={{ fontSize: spec.fontSize }} className="font-normal tracking-tight whitespace-nowrap">
+              <span 
+                style={{ fontSize: spec.fontSize }} 
+                className="flex items-center font-normal leading-none tracking-tight whitespace-nowrap"
+              >
                 {children}
               </span>
             </>
@@ -254,7 +260,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               initial={{ opacity: 0.4, scale: 0.95 }}
               animate={{ opacity: 0, scale: 1.2 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-white pointer-events-none z-30"
+              className="absolute inset-0 z-30 bg-white pointer-events-none"
               transition={{ duration: 0.15 }}
             />
           )}

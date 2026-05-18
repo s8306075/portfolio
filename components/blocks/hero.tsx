@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const LIFT_CURVE = [0.16, 1, 0.3, 1];
+import { ArrowRight } from "lucide-react";
 
 export function Hero() {
   const [stage, setStage] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isIdle, setIsIdle] = useState(false);
 
   useEffect(() => {
@@ -48,18 +46,10 @@ export function Hero() {
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
   return (
     <section 
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full bg-bg-01 overflow-hidden flex items-center cs-01-void"
+      className="relative flex items-center w-full min-h-screen overflow-hidden cs-01-void"
+      style={{ background: 'radial-gradient(circle at 50% -20%, #1A2635 0%, #0A0C0F 60%)' }}
     >
       <div className="absolute inset-0 mat-05-satin opacity-[0.02] pointer-events-none z-0" />
       
@@ -67,7 +57,7 @@ export function Hero() {
       <motion.div 
         animate={{ opacity: [0.03, 0.07, 0.03] }}
         transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
       />
 
       <div 
@@ -98,35 +88,35 @@ export function Hero() {
         </AnimatePresence>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 grid grid-cols-12 gap-12 lg:gap-0 relative z-20 h-full">
-        <div className="col-span-12 lg:col-span-5 flex flex-col justify-center min-h-[500px] lg:min-h-[650px] relative w-full lg:w-auto">
+      <div className="container relative z-20 grid w-full h-full grid-cols-1 gap-12 px-6 mx-auto lg:px-12 lg:grid-cols-12 lg:gap-0 lg:-translate-y-6">
+        <div className="col-span-1 lg:col-span-12 xl:col-span-5 flex flex-col justify-center min-h-[500px] lg:min-h-[650px] relative w-full lg:w-auto">
           <motion.div
-            initial={{ x: -40, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col relative z-20"
+            className="relative z-20 flex flex-col"
           >
+            <p className="font-editorial font-semibold text-txt-02 text-[14px] md:text-[16px] lg:text-[20px] mb-8 lg:mb-12 opacity-100 flex items-center gap-4">
+              <span className="w-8 h-[0.5px] bg-white/50" />
+              全端獨立客製化網站開發
+            </p>
+
             <div className="relative mb-6 lg:mb-10 w-full max-w-full sm:max-w-[550px]">
               <h1 
-                className="font-serif text-txt-01 text-[36px] sm:text-[44px] md:text-[52px] lg:text-[60px] xl:text-[72px] leading-[1.05] font-normal tracking-tighter break-words"
+                className="font-serif text-txt-01 text-[32px] xs:text-[36px] sm:text-[44px] md:text-[52px] lg:text-[60px] xl:text-[72px] leading-[1.05] font-normal tracking-tighter"
               >
-                把那些你聽不懂的降到零門檻
+                講人話的開發：把混亂想法客製化
               </h1>
             </div>
 
-            <h3 className="font-sans text-txt-02 text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] xl:text-[20px] font-light w-full max-w-full sm:max-w-[460px] mb-6 lg:mb-10 leading-[1.7] lg:leading-[1.8] border-l border-white/30 pl-4 lg:pl-8 break-words text-txt-02/90">
-              想法很多思緒卻很亂<br className="hidden sm:block" />
-              十年全端經驗幫你實作
+            <h3 className="font-sans text-txt-02 text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] xl:text-[20px] font-light w-full max-w-full sm:max-w-[460px] mb-6 lg:mb-10 leading-[1.7] lg:leading-[1.8] border-l border-accent-01/30 pl-4 lg:pl-8 text-txt-02/90">
+              不用懂技術術語，你只要專注在新點子上<br className="hidden sm:block" />
+              10 年全端開發經驗，把你的想法製作出客製化網站
             </h3>
 
-            <p className="font-editorial text-txt-02 text-[18px] md:text-[24px] lg:text-[26px] italic mb-8 lg:mb-12 opacity-80 flex items-center gap-4">
-              <span className="w-8 h-[0.5px] bg-white/10" />
-              全端獨立開發，拒絕模板
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 lg:gap-8 w-full max-w-[280px] sm:max-w-none">
-              <Button variant="primary" className="w-full sm:w-[160px] lg:w-[180px] h-12 text-[15px] tracking-widest font-normal bg-[#E8702A] hover:bg-[#ff7d2d] transition-colors">
-                丟出你的問題
+            <div className="flex flex-col w-full gap-4 sm:flex-row lg:gap-8 sm:max-w-none">
+              <Button variant="primary" className="w-full sm:w-[160px] lg:w-[180px] h-12 text-[15px] tracking-widest font-normal" icon={<ArrowRight className="w-4 h-4" />}>
+                丟出你的想法
               </Button>
               <Button 
                 variant="secondary" 
@@ -139,7 +129,7 @@ export function Hero() {
                     const elementRect = element.getBoundingClientRect().top;
                     const elementPosition = elementRect - bodyRect;
                     const offsetPosition = elementPosition - offset;
-
+                    
                     window.scrollTo({
                       top: offsetPosition,
                       behavior: 'smooth'
@@ -148,13 +138,13 @@ export function Hero() {
                 }}
                 className="w-full sm:w-[160px] lg:w-[180px] h-12 text-[15px] tracking-widest border-white/20 hover:bg-white/5 font-normal"
               >
-                看我怎麼處理
+                查看案例
               </Button>
             </div>
           </motion.div>
         </div>
 
-        <div className="hidden lg:flex lg:col-span-7 relative min-h-[400px] lg:min-h-[500px] items-center justify-center lg:justify-end">
+        <div className="hidden lg:flex lg:col-span-7 xl:col-span-7 relative min-h-[400px] lg:min-h-[500px] items-center justify-center lg:justify-end">
           <VisualEvolution stage={stage} />
         </div>
       </div>
@@ -164,12 +154,12 @@ export function Hero() {
 
 function VisualEvolution({ stage }: { stage: number }) {
   return (
-    <div className="relative w-full aspect-square max-w-[540px] flex items-center justify-center lg:justify-end">
+    <div className="relative w-full aspect-square max-w-[600px] flex items-center justify-center lg:justify-end">
       <AnimatePresence mode="wait">
         {stage >= 7 ? (
           <ServiceModules key="modules" />
         ) : stage >= 6 ? (
-          <Reconstruction key="reconstruction" stage={stage} />
+          <Reconstruction key="reconstruction" />
         ) : (
           <div className="relative w-full h-full flex items-center justify-center lg:justify-end pr-[10%] overflow-visible">
       <motion.div 
@@ -195,11 +185,11 @@ function VisualEvolution({ stage }: { stage: number }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 0.8, 0] }}
             transition={{ duration: 0.2, times: [0, 0.1, 1] }}
-            className="absolute inset-0 bg-white mix-blend-screen z-50 pointer-events-none blur-sm"
+            className="absolute inset-0 z-50 bg-white pointer-events-none mix-blend-screen blur-sm"
           />
         )}
 
-        <div className="relative flex flex-col gap-10 items-end">
+                <div className="relative flex flex-col items-end gap-10">
           {[480, 240, 360].map((width, i) => (
             <motion.div
               key={i}
@@ -207,38 +197,45 @@ function VisualEvolution({ stage }: { stage: number }) {
               animate={{ 
                 width: stage >= 1 ? width : 0, 
                 opacity: stage >= 5 ? 0 : 1,
-                x: stage >= 5 ? (30 + i * 15) : 0, // Enhanced staggered drift
+                x: stage >= 5 ? (30 + i * 15) : 0,
                 scaleX: stage === 3 ? [1, 1.015, 1] : 1,
                 height: 1,
-                backgroundColor: stage >= 3 ? "var(--color-txt-01)" : "var(--color-primary-01)"
+                backgroundColor: stage >= 3 ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.15)"
               }}
               transition={{ 
                 width: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
                 opacity: { 
                   duration: 0.25, 
-                  delay: stage >= 5 ? i * 0.05 : 0, // 50ms Chained Dissolution
+                  delay: stage >= 5 ? i * 0.05 : 0,
                   ease: "easeOut" 
                 },
                 x: { duration: 0.4, ease: "easeOut" },
-                scaleX: { duration: 0.8, ease: "easeInOut" },
-                backgroundColor: { duration: 0.4 }
+                scaleX: { duration: 0.8, ease: "easeInOut" }
               }}
-              className="relative mat-01-rhodium shadow-[0_0_1px_rgba(255,255,255,0.1)]"
+              className="relative"
               style={{ transformOrigin: "right center" }}
             >
-                    {/* Anchor Points - 鋼性節點 */}
+                    {/* Anchor Points - 強化鋼性節點 (移除光暈，改用內核結構) */}
                     <motion.div 
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: stage >= 1 ? 1 : 0 }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[2.5px] h-[2.5px] bg-txt-01 shadow-[0_0_10px_theme(colors.txt.01)] rotate-45"
-                    />
+                      animate={{ 
+                        opacity: stage >= 1 ? 1 : 0,
+                        rotate: stage >= 3 ? 135 : 45
+                      }}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 w-[4px] h-[4px] flex items-center justify-center"
+                    >
+                        {/* 外框：Rhode Metal */}
+                        <div className="absolute inset-0 rotate-45 border border-white/30" />
+                        {/* 內核：Cera-Carbon */}
+                        <div className="w-[1.5px] h-[1.5px] bg-white" />
+                    </motion.div>
                     
-                    {/* [Opt-05] 結構應力點：Along path movement */}
+                    {/* [Opt-05] 結構應力點：Along path movement (無光暈移動點) */}
                     {stage >= 1 && stage < 5 && (
                       <motion.div 
                         animate={{ left: ["0%", "100%"] }}
                         transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                        className="absolute top-1/2 -translate-y-1/2 w-1 h-1 bg-txt-01 blur-[0.5px] opacity-40 z-20"
+                        className="absolute top-1/2 -translate-y-1/2 w-[2px] h-[2px] bg-white opacity-20 z-20"
                       />
                     )}
                     
@@ -266,7 +263,7 @@ function VisualEvolution({ stage }: { stage: number }) {
               </div>
               
               {stage === 5 && (
-                <div className="absolute inset-0 z-50 pointer-events-none flex items-center justify-center">
+                <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none">
                   <motion.div 
                     initial={{ height: 0, opacity: 1 }}
                     animate={{ height: "250%", opacity: [1, 1, 0] }}
@@ -277,10 +274,10 @@ function VisualEvolution({ stage }: { stage: number }) {
                     className="absolute w-[2000px] flex items-center justify-center overflow-visible"
                     style={{ top: "50%", transform: "translateY(-50%)" }}
                   >
-                    <div className="w-full h-[2px] bg-primary-01-bright shadow-[0_0_60px_theme(colors.primary-01-bright)] relative">
-                      <div className="absolute left-1/2 -translate-x-1/2 w-full h-full bg-primary-01-bright" />
-                      <div className="absolute inset-x-0 bottom-full bg-gradient-to-t from-primary-01-bright to-transparent blur-[30px] h-[60px] opacity-80" />
-                      <div className="absolute inset-x-0 top-full bg-gradient-to-b from-primary-01-bright to-transparent blur-[30px] h-[60px] opacity-80" />
+                    <div className="w-full h-[1px] bg-white opacity-80 relative">
+                      <div className="absolute w-full h-full -translate-x-1/2 bg-white left-1/2" />
+                      <div className="absolute inset-x-0 bottom-full bg-gradient-to-t from-white/10 to-transparent blur-[10px] h-[20px] opacity-40" />
+                      <div className="absolute inset-x-0 top-full bg-gradient-to-b from-white/10 to-transparent blur-[10px] h-[20px] opacity-40" />
                     </div>
                   </motion.div>
                 </div>
@@ -293,7 +290,7 @@ function VisualEvolution({ stage }: { stage: number }) {
   );
 }
 
-function Reconstruction({ stage }: { stage: number }) {
+function Reconstruction() {
   const [mounted, setMounted] = useState(false);
   const [fragments, setFragments] = useState<{ id: number; x: number; y: number; scaleX: number; rotate: number; delay: number }[]>([]);
 
@@ -346,7 +343,7 @@ function Reconstruction({ stage }: { stage: number }) {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: [0, 1, 0], scale: [0.8, 1.1, 1.2] }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="absolute inset-0 bg-white/5 blur-3xl rounded-full"
+        className="absolute inset-0 rounded-full bg-white/5 blur-3xl"
       />
     </div>
   );
@@ -354,13 +351,13 @@ function Reconstruction({ stage }: { stage: number }) {
 
 function ServiceModules() {
   const modules = [
-    { id: "01", title: "介面手作感", sub: "介面", desc: "拒絕套用模板，我用代碼製作出你的靈魂。" },
-    { id: "02", title: "自動化的自由", sub: "自動", desc: "把重複性工作變成後台，把你的時間還給自己。" },
-    { id: "03", title: "數據不騙人", sub: "清晰", desc: "清理混亂紀錄，用圖表讓你看清下一步怎麼走" },
+    { id: "01", title: "說得通，才做得出", sub: "拒絕雞同鴨講", desc: "不只聽你想要的，更聽你需要的。幫你把天馬行空的願景，轉化為邏輯清晰、操作直覺的真實網頁。" },
+    { id: "02", title: "讓網站自己工作", sub: "告別瑣事地獄", desc: "那些每天重複、讓你心累的手動流程，我把它們封裝進後台。讓系統幫你跑腿，你把時間留給更重要的人事物。" },
+    { id: "03", title: "零模糊乾淨交付", sub: "合約寫到哪就做到哪", desc: "拒絕無限追加或含糊不清。合約怎麼定，時間到了就交出什麼，絕不半路追加預算。通過嚴密測試、乾淨好維護，清爽點收不留爛攤子。" },
   ];
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-[520px] relative">
+    <div className="flex flex-col gap-3 w-full max-w-[580px] relative">
       {/* Re-imaging Glow Bloom */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -388,9 +385,9 @@ function ServiceModules() {
             opacity: { duration: 0.5 }
           }}
           className={cn(
-            "relative group p-6 lg:p-7 mat-02-mica border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden",
+            "relative group py-4 px-6 lg:py-5 lg:px-8 mat-02-mica border border-primary-01/10 hover:border-accent-01/30 transition-all duration-500 overflow-hidden",
             // Asymmetric displacement based on index
-            i === 0 ? "lg:mr-12" : i === 1 ? "lg:ml-12" : "lg:mr-6 lg:ml-6"
+            i === 0 ? "lg:mr-8" : i === 1 ? "lg:ml-8" : "lg:mr-4 lg:ml-4"
           )}
           style={{ transform: "translateZ(0px)" }}
         >
@@ -399,7 +396,7 @@ function ServiceModules() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: [0, 0.2, 0], scale: [0.8, 1.2] }}
             transition={{ duration: 0.6, delay: i * 0.12 + 0.4 }}
-            className="absolute inset-0 bg-primary-01/10 blur-xl pointer-events-none"
+            className="absolute inset-0 pointer-events-none bg-accent-01/10 blur-xl"
           />
 
           {/* Subtle Scanline on Module Appearance */}
@@ -407,20 +404,20 @@ function ServiceModules() {
             initial={{ left: "-100%" }}
             animate={{ left: "200%" }}
             transition={{ duration: 1.2, delay: i * 0.12 + 0.3, ease: "linear" }}
-            className="absolute top-0 bottom-0 w-[40%] bg-gradient-to-r from-transparent via-primary-01/10 to-transparent skew-x-[-20deg] pointer-events-none"
+            className="absolute top-0 bottom-0 w-[40%] bg-gradient-to-r from-transparent via-accent-01/10 to-transparent skew-x-[-20deg] pointer-events-none"
           />
           <div className="absolute inset-0 bg-noise-texture opacity-[0.02] pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary-01-bright/30 to-transparent" />
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary-01/30 to-transparent group-hover:via-accent-01/60 transition-all duration-500" />
           
           <div className="relative z-10 flex flex-col">
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[11px] text-txt-04 group-hover:text-txt-02 transition-colors tracking-[0.3em]">{m.id}</span>
-              <span className="font-editorial text-[15px] text-accent-02 italic opacity-80 group-hover:opacity-100 transition-opacity">
+              <span className="font-editorial text-[14px] text-txt-01/80 group-hover:opacity-100 transition-opacity uppercase tracking-[0.1em]">
                 {m.sub}
               </span>
             </div>
             
-            <h4 className="font-serif text-[21px] text-txt-01 font-semibold tracking-tight mb-2 group-hover:text-txt-01 transition-colors">
+            <h4 className="font-serif text-[21px] text-txt-01 font-semibold tracking-tight mb-1 group-hover:text-txt-01 transition-colors">
               {m.title}
             </h4>
             
@@ -429,7 +426,7 @@ function ServiceModules() {
             </p>
           </div>
           
-          <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-white/0 group-hover:bg-primary-01-bright/80 transition-all duration-300" />
+          <div className="absolute right-0 top-0 bottom-0 w-[1px] bg-primary-01/10 group-hover:bg-accent-01/80 transition-all duration-300" />
         </motion.div>
       ))}
     </div>

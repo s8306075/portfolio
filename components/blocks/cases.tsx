@@ -1,13 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "motion/react";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, MotionValue } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-/**
- * [SEC-05] 案例數據對位
- * 採「代號-識別」雙軌制，排除商業黑話，強調物理結果。
- */
 const CASES = [
   {
     id: "001",
@@ -52,21 +48,21 @@ export function Cases() {
   return (
     <section 
       ref={containerRef}
-      className="relative py-24 lg:py-48 cs-03-depth-fault lg:overflow-visible overflow-hidden bg-bg-01" 
+      className="relative py-24 overflow-hidden lg:py-48 cs-03-depth-fault lg:overflow-visible" 
+      style={{ background: 'radial-gradient(circle at 50% -20%, #1A2635 0%, #0A0C0F 60%)' }}
       id="cases"
     >
       {/* 背景能量場與網格 */}
       <GridField scrollProgress={scrollProgress} />
       
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <h2 className="sr-only">解決真實問題</h2>
+      <div className="container relative z-10 w-full px-4 mx-auto lg:px-12">
         <DecryptorHeader />
 
         {/* 桌面端佈局 (Lg+) - 終端診斷系統 */}
-        <div className="hidden lg:grid grid-cols-12 gap-16 items-start">
+        <div className="items-start hidden grid-cols-12 gap-16 lg:grid">
           
           {/* 左側：專案選單 */}
-          <div className="lg:col-span-4 grid grid-cols-1 gap-4">
+          <div className="grid grid-cols-1 gap-4 lg:col-span-4">
             {CASES.map((item, i) => (
               <motion.button
                 key={item.id}
@@ -85,34 +81,30 @@ export function Cases() {
                      activeCase === i ? "bg-primary-01-bright shadow-[0_0_8px_theme(colors.primary-01-bright)]" : "bg-txt-04"
                    )} />
                    <span className="font-mono text-[9px] tracking-[0.3em] text-txt-04 font-black">
-                     CASE.{item.id}
+                     成果.{item.id}
                    </span>
                 </div>
                 
                 <h4 className={cn(
                   "font-serif text-[22px] font-medium tracking-tight mb-1 transition-colors duration-500",
-                  activeCase === i ? "text-primary-01-bright" : "text-txt-01"
+                  activeCase === i ? "text-txt-01" : "text-txt-03/60"
                 )}>
                   {item.title}
                 </h4>
 
-                <AnimatePresence>
-                  {activeCase === i && (
-                    <motion.div 
-                      key="scan"
-                      initial={{ left: "-100%" }}
-                      animate={{ left: "200%" }}
-                      transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                      className="absolute top-0 bottom-0 w-24 bg-gradient-to-r from-transparent via-primary-01/5 to-transparent skew-x-[-30deg] pointer-events-none"
-                    />
-                  )}
-                </AnimatePresence>
+                {/* 鋼鐵刃脊：活性指示線 */}
+                {activeCase === i && (
+                  <motion.div 
+                    layoutId="active-blade"
+                    className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-accent-01 shadow-[0_0_15px_rgba(224,106,38,0.4)]"
+                  />
+                )}
               </motion.button>
             ))}
           </div>
 
           {/* 右側：診斷報告主控台 */}
-          <div className="lg:col-span-8 relative">
+          <div className="relative lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCase}
@@ -121,60 +113,59 @@ export function Cases() {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  "relative bg-bg-02/80 mat-02-mica border border-white/10 p-14 overflow-hidden min-h-[500px]",
-                  "shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8)]"
+                  "relative bg-[#0F1115]/90 mat-02-mica border border-white/5 p-14 overflow-hidden min-h-[520px]",
+                  "shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]"
                 )}
               >
-                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30" />
-                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30" />
+                <div className="relative z-10 flex flex-col h-full text-left">
+                  {/* Header: ID + Subject + Breakthrough */}
+                  <div className="relative flex flex-col gap-1 pb-8 mb-12 border-b border-white/5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-1.5 h-3 bg-primary-01/40" />
+                      <span className="font-mono text-txt-03/60 text-[10px] tracking-[0.4em] font-bold uppercase">
+                        案場記錄.{CASES[activeCase].id}
+                      </span>
+                    </div>
+                    
+                    <div className="flex items-end justify-between gap-8 mt-4">
+                       <h3 className="font-serif text-txt-01 text-[32px] xl:text-[48px] font-medium tracking-tight leading-[1.1] max-w-[65%]">
+                         {CASES[activeCase].title}
+                       </h3>
 
-                <div className="relative z-10 flex flex-col h-full">
-                  {/* Header: ID + Title */}
-                  <div className="flex items-center gap-3 mb-10 pb-6 border-b border-white/5">
-                    <div className="w-8 h-[1px] bg-primary-01/30" />
-                    <span className="font-mono text-accent-02 text-[10px] tracking-[0.4em] font-bold uppercase">
-                      DIAGNOSIS_CASE.{CASES[activeCase].id}
-                    </span>
+                       {/* 成果指標 (Breakthrough) - 置於右上角 */}
+                       <div className="flex flex-col items-end pb-1 shrink-0">
+                         <span className="font-mono text-txt-01 text-[12px] tracking-[0.3em] font-black uppercase mb-1 drop-shadow-[0_0_8px_rgba(208,220,232,0.3)]">
+                           {CASES[activeCase].breakthroughLabel}
+                         </span>
+                         <span className="text-primary-01-bright text-[64px] xl:text-[72px] font-black leading-none drop-shadow-[0_0_15px_rgba(208,220,232,0.2)]">
+                           {CASES[activeCase].breakthroughValue}
+                         </span>
+                       </div>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-12 mb-12">
-                    {/* The Chaos (Left) */}
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-2">
-                         <div className="w-1.5 h-4 bg-white/20" />
-                         <span className="font-mono text-txt-04 text-[10px] tracking-[0.2em] font-bold uppercase">原本的混亂</span>
-                      </div>
-                      <div className="relative">
-                        <div className="absolute -left-6 top-0 bottom-0 w-[1px] bg-white/10" />
-                        <p className="font-sans text-txt-03 text-[16px] italic leading-relaxed pl-6 py-6 pr-8">
+                  {/* 核心內容區：對比式佈局 */}
+                  <div className="grid grid-cols-1 gap-12">
+                    {/* 遭遇瓶頸 (Friction) */}
+                    <div className="relative pl-8 group/friction">
+                      <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-white/10 group-hover:bg-white/20 transition-colors" />
+                      <div className="flex flex-col gap-4">
+                        <span className="font-mono text-txt-03 text-[11px] tracking-[0.3em] font-bold uppercase">遭遇瓶頸</span>
+                        <p className="font-sans text-txt-01 text-[20px] font-light leading-relaxed italic opacity-90">
                           &ldquo;{CASES[activeCase].friction}&rdquo;
                         </p>
                       </div>
                     </div>
 
-                    {/* The Breakthrough (Right) */}
-                    <div className="flex flex-col items-end justify-center shrink-0 relative">
-                      <div className="absolute inset-0 bg-primary-01/[0.02] blur-[40px] -z-10" />
-                      <span className="font-mono text-txt-04 text-[11px] font-black tracking-[0.4em] mb-4 uppercase border-b border-primary-01/20 pb-1">
-                        {CASES[activeCase].breakthroughLabel}
-                      </span>
-                      <span className="text-txt-01 text-[84px] font-black leading-none italic">
-                        {CASES[activeCase].breakthroughValue}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* The Description (Bottom) */}
-                  <div className="space-y-6 pt-10 border-t border-white/5">
-                    <div className="flex items-center gap-2">
-                       <div className="w-1.5 h-4 bg-primary-01" />
-                       <span className="font-mono text-txt-04 text-[10px] tracking-[0.2em] font-bold uppercase">重塑後的秩序</span>
-                    </div>
-                    <div className="relative group/desc">
-                      <div className="absolute -left-10 top-0 bottom-0 w-[1px] bg-gradient-to-b from-primary-01/40 via-primary-01/5 to-transparent group-hover:from-primary-01 transition-all duration-500" />
-                      <p className="font-sans text-txt-01 text-[20px] leading-[1.8] font-light max-w-2xl">
-                        {CASES[activeCase].description}
-                      </p>
+                    {/* 解決方案 (Description) */}
+                    <div className="relative pl-8 group/solution">
+                      <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary-01 shadow-[0_0_8px_rgba(208,220,232,0.1)]" />
+                      <div className="flex flex-col gap-4">
+                        <span className="font-mono text-primary-01 text-[11px] tracking-[0.3em] font-bold uppercase">解決方法</span>
+                        <p className="font-sans text-txt-01 text-[22px] leading-[1.7] font-light max-w-3xl">
+                          {CASES[activeCase].description}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -195,27 +186,27 @@ export function Cases() {
         </div>
 
         {/* [MOB-07] 行動端診斷流 (Mobile Diagnosis Flow) */}
-        <div className="lg:hidden relative">
+        <div className="relative lg:hidden">
           {/* 上方：標籤導航 */}
-          <div className="flex border-b border-white/10 mb-8 overflow-x-auto no-scrollbar -mx-6 px-6">
+          <div className="flex px-6 mb-8 -mx-6 overflow-x-auto border-b border-white/10 no-scrollbar bg-bg-02/20 backdrop-blur-md">
             {CASES.map((item, i) => (
               <button
                 key={item.id}
                 onClick={() => setActiveCase(i)}
                 className={cn(
-                  "flex-shrink-0 px-6 py-4 transition-all relative border-r border-white/5",
-                  activeCase === i ? "bg-primary-01/5" : "opacity-40"
+                  "flex-shrink-0 px-8 py-5 transition-all relative border-r border-white/5",
+                  activeCase === i ? "bg-white/[0.03]" : "opacity-40"
                 )}
               >
-                <div className="flex flex-col items-start gap-1">
+                <div className="flex flex-col items-center gap-1.5">
                   <span className={cn(
-                    "font-mono text-[9px] tracking-[0.34em] font-black uppercase",
-                    activeCase === i ? "text-primary-01-bright" : "text-txt-04"
+                    "font-mono text-[8px] tracking-[0.4em] font-black",
+                    activeCase === i ? "text-txt-03" : "text-txt-04"
                   )}>
-                    ID.{item.id}
+                    成果_{item.id}
                   </span>
                   <span className={cn(
-                    "text-[12px] font-medium transition-colors whitespace-nowrap",
+                    "text-[13px] font-sans font-medium tracking-wide transition-colors whitespace-nowrap",
                     activeCase === i ? "text-txt-01" : "text-txt-03"
                   )}>
                     {item.category}
@@ -224,7 +215,7 @@ export function Cases() {
                 {activeCase === i && (
                   <motion.div 
                     layoutId="activeTabMobile"
-                    className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-primary-01-bright shadow-[0_0_8px_theme(colors.primary-01-bright)]"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-accent-01"
                   />
                 )}
               </button>
@@ -232,7 +223,9 @@ export function Cases() {
           </div>
 
           {/* 內容顯示區 */}
-          <div className="relative bg-bg-02/60 border border-white/10 p-8 shadow-2xl">
+          <div className="relative bg-[#0F1115]/90 border border-white/5 p-6 md:p-8 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 right-0 w-16 h-[1px] bg-white/20" />
+            
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeCase}
@@ -242,49 +235,47 @@ export function Cases() {
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-10"
               >
-                {/* 標題 */}
-                <div className="space-y-3 pb-6 border-b border-white/5">
-                   <h3 className="text-txt-01 font-serif text-[26px] leading-[1.2] tracking-tighter font-medium italic">
+                {/* 標題與ID */}
+                <div className="pb-8 space-y-3 border-b border-white/5">
+                   <span className="font-mono text-txt-03/60 text-[9px] tracking-widest uppercase">案場資料_{CASES[activeCase].id}</span>
+                   <h3 className="text-txt-01 font-serif text-[28px] leading-tight tracking-tight font-medium">
                      {CASES[activeCase].title}
                    </h3>
                 </div>
 
-                <div className="space-y-10">
-                  {/* 最初混亂 */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-1 h-3 bg-white/20" />
-                      <span className="text-txt-04 font-mono text-[9px] tracking-widest uppercase">原本的混亂</span>
-                    </div>
-                    <div className="text-txt-03 text-[15px] italic leading-relaxed border-l border-white/10 p-5">
-                      &ldquo;{CASES[activeCase].friction}&rdquo;
-                    </div>
-                  </div>
+                <div className="space-y-12">
+                   {/* 遭遇瓶頸 */}
+                   <div className="relative pl-6">
+                      <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-white/10" />
+                      <div className="flex flex-col gap-3">
+                        <span className="text-txt-03/80 font-mono text-[10px] tracking-[0.3em] font-bold uppercase">遭遇瓶頸</span>
+                        <p className="text-txt-01 text-[17px] font-light leading-relaxed italic">
+                          &ldquo;{CASES[activeCase].friction}&rdquo;
+                        </p>
+                      </div>
+                   </div>
 
-                  {/* 突破指標 */}
-                  <div className="flex flex-col items-center py-8 bg-primary-01/[0.03] border-y border-primary-01/5 relative overflow-hidden">
-                    <motion.div
-                      animate={{ opacity: [0.03, 0.08, 0.03] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute inset-0 bg-primary-01/10 blur-xl"
-                    />
-                    <span className="text-txt-04 font-mono text-[10px] tracking-[0.4em] uppercase mb-4 relative z-10">
+                  {/* 成果指標 (突破) */}
+                  <div className="flex flex-col items-center py-10 bg-primary-01/[0.04] border-y border-white/5 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary-01/40 to-transparent" />
+                    <span className="text-txt-01 font-mono text-[13px] tracking-[0.4em] font-black uppercase mb-3 relative z-10 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
                       {CASES[activeCase].breakthroughLabel}
                     </span>
-                    <span className="text-primary-01-bright text-[64px] font-black italic tracking-tighter leading-none relative z-10 drop-shadow-[0_0_10px_rgba(208,220,232,0.1)]">
+                    <span className="text-primary-01-bright text-[72px] font-black tracking-tighter leading-none relative z-10 drop-shadow-[0_0_20px_rgba(208,220,232,0.3)]">
                       {CASES[activeCase].breakthroughValue}
                     </span>
+                    <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-l from-transparent via-primary-01/40 to-transparent" />
                   </div>
 
-                  {/* 重塑秩序 */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                       <div className="w-1 h-3 bg-primary-01" />
-                       <span className="text-txt-04 font-mono text-[9px] tracking-widest uppercase block">重塑後的秩序</span>
+                  {/* 解決方案 */}
+                  <div className="relative pl-6">
+                    <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary-01 shadow-[0_0_6px_rgba(208,220,232,0.08)]" />
+                    <div className="flex flex-col gap-3">
+                      <span className="text-primary-01 font-mono text-[10px] tracking-[0.3em] font-bold uppercase">解決方法</span>
+                      <p className="text-txt-01 text-[17px] leading-[1.8] font-light">
+                        {CASES[activeCase].description}
+                      </p>
                     </div>
-                    <p className="text-txt-01 text-[15px] leading-relaxed font-light border-l border-primary-01/30 pl-5 pr-2">
-                      {CASES[activeCase].description}
-                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -292,7 +283,7 @@ export function Cases() {
           </div>
 
           {/* 底部導航指示器 */}
-          <div className="mt-8 flex items-center justify-between">
+          <div className="flex items-center justify-between mt-8">
             <div className="flex gap-2">
               {CASES.map((_, i) => (
                 <div 
@@ -324,48 +315,51 @@ export function Cases() {
  */
 function DecryptorHeader() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [statusText, setStatusText] = useState("INITIALIZING");
   const targetText = "解決真實問題";
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let startTime: number | null = null;
     const chars = "0123456789ABCDEF!@#$%^&*()_+<>?:{}|";
-    const duration = 400; 
+    const decryptDuration = 600; 
     
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
+    const updateCanvasSize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = container.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      return rect;
+    };
 
-    const draw = (progress: number, time: number) => {
+    let rect = updateCanvasSize();
+
+    const draw = (progress: number) => {
        ctx.clearRect(0, 0, rect.width, rect.height);
        
        const isMobile = window.innerWidth < 768;
-       const fontSize = isMobile ? 36 : (window.innerWidth < 1024 ? 54 : 72);
+       const fontSize = isMobile ? 32 : (window.innerWidth < 1024 ? 48 : 64);
        
        ctx.font = `600 ${fontSize}px 'Noto Serif TC', serif`;
        ctx.textBaseline = "middle";
+       ctx.textAlign = "left";
        ctx.fillStyle = "#D0DCE8";
        
-       // Handle multiline for mobile
-       const maxWidth = rect.width - 20;
+       const fixedCount = Math.floor(progress * targetText.length);
        
        let x = 0;
-       let y = rect.height / 2;
-       
-       if (isMobile) {
-         // simplified wrap for mobile
-         y = 40;
-       }
-
-       const fixedCount = Math.floor(progress * targetText.length);
+       const y = rect.height / 2;
        
        for(let i=0; i<targetText.length; i++) {
          const char = targetText[i];
@@ -375,15 +369,8 @@ function DecryptorHeader() {
          ctx.globalAlpha = isFixed ? 1 : 0.3;
          if(!isFixed && Math.random() > 0.8) ctx.globalAlpha = 0.8;
          
-         const metrics = ctx.measureText(renderChar);
-         
-         if (x + metrics.width > maxWidth) {
-           x = 0;
-           y += fontSize * 1.2;
-         }
-         
          ctx.fillText(renderChar, x, y);
-         x += metrics.width + (isFixed ? 0 : 2); 
+         x += ctx.measureText(renderChar).width + (isFixed ? 2 : 4); 
        }
     };
 
@@ -394,21 +381,28 @@ function DecryptorHeader() {
           if (elapsed < 800) {
             // 第一階段：快速亂碼 0-800ms
             if (Math.floor(elapsed / 50) % 2 === 0) {
-               draw(0, time);
+               draw(0);
                setStatusText(Math.floor(elapsed / 100) % 2 === 0 ? "解碼中 / DECRYPTING..." : "分析中 / ANALYZING...");
             }
             animationFrameId = requestAnimationFrame(animate);
           } else {
             // 第二階段：定格 400ms
-            const lockProgress = Math.min((elapsed - 800) / duration, 1);
+            const lockProgress = Math.min((elapsed - 800) / decryptDuration, 1);
             setStatusText("來源已驗證 / VERIFIED_SOURCE");
-            draw(lockProgress, time);
+            draw(lockProgress);
             if (lockProgress < 1) {
                animationFrameId = requestAnimationFrame(animate);
             }
           }
         };
     
+    const handleResize = () => {
+      rect = updateCanvasSize();
+      draw(1); 
+    };
+
+    window.addEventListener('resize', handleResize);
+
     const observer = new IntersectionObserver((entries) => {
        if(entries[0].isIntersecting) {
           startTime = null;
@@ -421,6 +415,7 @@ function DecryptorHeader() {
     return () => {
       cancelAnimationFrame(animationFrameId);
       observer.disconnect();
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -440,10 +435,10 @@ function DecryptorHeader() {
         </div>
       </motion.div>
 
-      <div className="w-full h-[160px] md:h-[140px] lg:h-[180px] mb-4 relative overflow-visible">
+      <div ref={containerRef} className="w-full h-[80px] md:h-[100px] lg:h-[120px] mb-4 relative overflow-visible">
         <canvas 
           ref={canvasRef} 
-          className="w-full h-full block" 
+          className="block" 
           style={{ transform: "translateZ(0)" }}
         />
       </div>
@@ -455,7 +450,7 @@ function DecryptorHeader() {
  * [CS-04] 網格消散 (Grid Field Dissolution)
  * 實現 40px 的格柵背景，隨捲動產生位移壓強感
  */
-function GridField({ scrollProgress }: { scrollProgress: any }) {
+function GridField({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
   const y = useTransform(scrollProgress, [0, 1], ["0%", "-15%"]);
   // 網格密度隨捲動增加
   const gridDensity = useTransform(scrollProgress, [0, 0.4], [0.2, 0.6]);
@@ -482,7 +477,3 @@ function GridField({ scrollProgress }: { scrollProgress: any }) {
     </div>
   );
 }
-
-
-
-
