@@ -1,5 +1,15 @@
+const getBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_BASE_URL) {
+    return process.env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '');
+  }
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`.replace(/\/$/, '');
+  }
+  return 'https://portfolio-mocha-beta-81.vercel.app';
+};
+
 export const SITE_CONFIG = {
-  url: process.env.NEXT_PUBLIC_BASE_URL || 'https://portfolio-mocha-beta-81.vercel.app/',
+  url: getBaseUrl(),
   name: '魚也是貓',
   siteName: '魚也是貓',
   title: '魚也是貓 | 專業系統整合顧問 · 自動化流程與 CRM 軟體專家',
