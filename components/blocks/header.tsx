@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from '@/lib/config';
 import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
@@ -395,12 +396,10 @@ function MobileCTA() {
         size="large"
         className="w-full tracking-[0.2em] text-[15px] font-black"
         onClick={() => {
-          const el = document.getElementById('footer-cta');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-          else window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          window.open(SITE_CONFIG.social.threads, '_blank', 'noopener,noreferrer');
         }}
       >
-        開始諮詢
+        與我聊聊
       </Button>
     </div>
   );

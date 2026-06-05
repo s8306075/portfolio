@@ -42,6 +42,7 @@ export const SITE_CONFIG = {
     facebook: "https://www.facebook.com/xu.xin.yu.81110",
     instagram: "https://www.instagram.com/a121403287009/"
   },
+  googleForm: 'https://forms.gle/o3TsLXTMJGoHGWrM7',
   locale: 'zh_TW',
   type: 'website'
 };

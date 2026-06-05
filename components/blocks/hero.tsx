@@ -115,8 +115,28 @@ export function Hero() {
             </h3>
 
             <div className="flex flex-col w-full gap-4 sm:flex-row lg:gap-8 sm:max-w-none">
-              <Button variant="primary" className="w-full sm:w-[160px] lg:w-[180px] h-12 text-[15px] tracking-widest font-normal" icon={<ArrowRight className="w-4 h-4" />}>
-                丟出你的想法
+              <Button 
+                variant="primary" 
+                className="w-full sm:w-[160px] lg:w-[180px] h-12 text-[15px] tracking-widest font-normal" 
+                icon={<ArrowRight className="w-4 h-4" />}
+                onClick={() => {
+                  const targetId = 'workflow';
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    const offset = 80;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+                    
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+              >
+                如何合作
               </Button>
               <Button 
                 variant="secondary" 
