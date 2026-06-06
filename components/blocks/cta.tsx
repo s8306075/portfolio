@@ -58,8 +58,16 @@ export function CTA() {
           <div className="relative group">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.08)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none blur-[60px]" />
             
-            <Button variant="primary" size="large" className="h-16 px-10 md:px-16 md:h-18" icon={<ArrowRight className="w-5 h-5" />}>
-               準備好了
+            <Button 
+              variant="primary" 
+              size="large" 
+              className="h-16 px-10 md:px-16 md:h-18" 
+              icon={<ArrowRight className="w-5 h-5" />}
+              onClick={() => {
+                window.open(SITE_CONFIG.googleForm, '_blank', 'noopener,noreferrer');
+              }}
+            >
+               丟出你的想法
             </Button>
           </div>
         </motion.div>
